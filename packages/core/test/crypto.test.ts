@@ -109,20 +109,20 @@ test("decryptPktAuto: современный формат распознаётс
 });
 
 test(
-  "реальные .pkt из корпуса (легаси): автодетект, расшифровка, повторное шифрование",
+  "реальные файлы корпуса: автодетект, расшифровка, повторное шифрование (оба контейнера)",
   { skip: samples.length === 0 ? "нет файлов в corpus/samples" : false },
   () => {
     for (const f of samples) {
       const raw = new Uint8Array(readFileSync(f));
-      assert.ok(isLegacyPkt(raw), `детектор легаси: ${f}`);
+      const legacy = isLegacyPkt(raw);
       const xml = decryptPktAuto(raw);
       const head = new TextDecoder().decode(xml.subarray(0, 200));
       assert.match(head, /^\s*(\uFEFF)?<\?xml|^\s*<PACKETTRACER/i, `XML-начало: ${f}`);
-      // повторное шифрование в легаси-контейнер и обратно — XML должен быть идентичен
-      const pkt = encryptPktLegacy(xml);
-      assert.ok(isLegacyPkt(pkt), `повторное шифрование даёт легаси-детект: ${f}`);
+      // повторное шифрование в родной контейнер и обратно — XML должен быть идентичен
+      const pkt = legacy ? encryptPktLegacy(xml) : encryptPkt(xml);
+      assert.ok(isLegacyPkt(pkt) === legacy, `повторное шифрование сохраняет семейство: ${f}`);
       assert.ok(beq(decryptPktAuto(pkt), xml), `roundtrip XML идентичен: ${f}`);
-      // и в современный контейнер тоже (для builder'а целевой формат — современный)
+      // и через современный контейнер тоже (целевой формат builder'а — современный)
       assert.ok(beq(decryptPkt(encryptPkt(xml)), xml), `roundtrip через современный контейнер: ${f}`);
     }
   }
