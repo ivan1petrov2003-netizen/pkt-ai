@@ -1,0 +1,7 @@
+{
+  "name": "@pkt-ai/cli",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "bin": { "pkt-tool": "src/pkt-tool.ts" }
+}

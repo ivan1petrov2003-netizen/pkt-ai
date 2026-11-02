@@ -1,0 +1,13 @@
+{
+  "name": "pkt-ai",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Генерация схем Cisco Packet Tracer (.pkt) через нейросеть: задание → IR → XML → .pkt",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "test": "node --test packages/core/test/crypto.test.ts",
+    "cli": "node packages/cli/src/pkt-tool.ts"
+  },
+  "engines": { "node": ">=22.6" }
+}
