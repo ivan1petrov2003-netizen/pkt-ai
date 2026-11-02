@@ -92,6 +92,24 @@ uuid в WORKSPACE/PHYSICAL (+ соответствующий NODE в PHYSICALWOR
 Кабели: `eStraightThrough`, `eCrossOver`, `eFiber`, `eSerial`, `eWireless`; тип линка `eCopper/eFiber/eSerial/eWireless`.
 Wi-Fi (Smartphone→AP) — НЕ линк, а ассоциация по SSID (тег `SSID` в устройстве).
 
+### Именование портов (подтверждено корпусом, 0 расхождений на 286 файлах)
+
+Порты в DEVICE XML не именованы — имена восстанавливаются по порядку модулей/портов
+(реализация: `engine/donor_registry.py`, реестр: `engine/registry.json`, 140 моделей):
+
+| Семейство | Правило | Примеры |
+|---|---|---|
+| Классические роутеры | `Base0/<n>` встроенные (n с 0); `Base<k>/<n>` модуль k | 2911: Gi0/0..0/2; 2811+NM: Ethernet1/0 |
+| ISR | `Base0/<k>/<n>` всегда три уровня | 4331: Gi0/0/0, Gi0/1/0 |
+| Свитчи | `Base0/<n>`, n с 1, счётчик на Base | 2960: Fa0/1..0/24, Gi0/1..0/2 |
+| Хосты (1 кабельный Ethernet) | `FastEthernet0` | PC-PT, Server-PT, Laptop-PT |
+| Cloud-стиль | `Ethernet<n>`, `Modem<n>` без слэша | Cloud-PT: Ethernet0..6 |
+| Беспроводные/AP | `Port <n>` | AccessPoint-PT: Port 0 |
+| IoT/спец (D0/A0/S0, Internet, Backbone) | имена только из корпуса (naming=special) | Battery: D0..D4 |
+
+`PORT/TYPE` = префикс среды + база: `eCopper/Ether|eFiber/Ether|eWireless…`
+MODULE-элементы задают границы модулей роутера/свитча.
+
 ## 4. Отличие .pka
 
 Корень `<PACKETTRACER5_ACTIVITY>`, внутри вложен полноценный `<PACKETTRACER5>` (сеть + activity-слои:

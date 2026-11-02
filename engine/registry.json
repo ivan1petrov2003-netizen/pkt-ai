@@ -1,0 +1,2243 @@
+{
+ "1841": {
+  "files": 199,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet|eCopperFastEthernet,eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0/0",
+   "Ethernet1/0",
+   "Ethernet2/0",
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet1/0",
+   "FastEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "FastEthernet0/0": 3,
+   "FastEthernet0/1": 2
+  }
+ },
+ "1941": {
+  "files": 31,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "GigabitEthernet0/0": 19,
+   "GigabitEthernet0/1": 8
+  }
+ },
+ "2620XM": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "2621XM": {
+  "files": 2,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet|eCopperFastEthernet,eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet1/0",
+   "FastEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "2811": {
+  "files": 58,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet|eCopperFastEthernet,eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0/0",
+   "Ethernet0/1",
+   "Ethernet1/0",
+   "Ethernet2/0",
+   "Ethernet2/1",
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "Port 0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Ethernet1/0": 1,
+   "FastEthernet0/0": 6,
+   "FastEthernet0/1": 4
+  }
+ },
+ "2901": {
+  "files": 22,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "GigabitEthernet0/0": 17,
+   "GigabitEthernet0/1": 15
+  }
+ },
+ "2911": {
+  "files": 10,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "GigabitEthernet0/0": 4,
+   "GigabitEthernet0/1": 1,
+   "GigabitEthernet0/2": 1
+  }
+ },
+ "2950-24": {
+  "files": 90,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/10",
+   "FastEthernet0/11",
+   "FastEthernet0/12",
+   "FastEthernet0/13",
+   "FastEthernet0/14",
+   "FastEthernet0/15",
+   "FastEthernet0/16",
+   "FastEthernet0/17",
+   "FastEthernet0/18",
+   "FastEthernet0/19",
+   "FastEthernet0/2",
+   "FastEthernet0/20",
+   "FastEthernet0/21",
+   "FastEthernet0/22",
+   "FastEthernet0/23",
+   "FastEthernet0/24",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet0/7",
+   "FastEthernet0/8",
+   "FastEthernet0/9",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/10",
+   "FastEthernet1/11",
+   "FastEthernet1/12",
+   "FastEthernet1/13",
+   "FastEthernet1/14",
+   "FastEthernet1/15",
+   "FastEthernet1/16",
+   "FastEthernet1/17",
+   "FastEthernet1/18",
+   "FastEthernet1/19",
+   "FastEthernet1/2",
+   "FastEthernet1/20",
+   "FastEthernet1/21",
+   "FastEthernet1/22",
+   "FastEthernet1/23",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "FastEthernet1/5",
+   "FastEthernet1/6",
+   "FastEthernet1/7",
+   "FastEthernet1/8",
+   "FastEthernet1/9"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "FastEthernet0/1": 8,
+   "FastEthernet0/2": 7,
+   "FastEthernet0/23": 5,
+   "FastEthernet0/3": 5,
+   "FastEthernet0/4": 2,
+   "FastEthernet0/5": 1
+  }
+ },
+ "2950T-24": {
+  "files": 7,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/10",
+   "FastEthernet0/11",
+   "FastEthernet0/12",
+   "FastEthernet0/13",
+   "FastEthernet0/14",
+   "FastEthernet0/15",
+   "FastEthernet0/16",
+   "FastEthernet0/17",
+   "FastEthernet0/18",
+   "FastEthernet0/19",
+   "FastEthernet0/2",
+   "FastEthernet0/20",
+   "FastEthernet0/21",
+   "FastEthernet0/22",
+   "FastEthernet0/23",
+   "FastEthernet0/24",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet0/7",
+   "FastEthernet0/8",
+   "FastEthernet0/9",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/10",
+   "FastEthernet1/11",
+   "FastEthernet1/12",
+   "FastEthernet1/13",
+   "FastEthernet1/14",
+   "FastEthernet1/15",
+   "FastEthernet1/16",
+   "FastEthernet1/17",
+   "FastEthernet1/18",
+   "FastEthernet1/19",
+   "FastEthernet1/2",
+   "FastEthernet1/20",
+   "FastEthernet1/21",
+   "FastEthernet1/22",
+   "FastEthernet1/23",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "FastEthernet1/5",
+   "FastEthernet1/6",
+   "FastEthernet1/7",
+   "FastEthernet1/8",
+   "FastEthernet1/9",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet2/0",
+   "GigabitEthernet2/1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "2960-24TT": {
+  "files": 59,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/10",
+   "FastEthernet0/11",
+   "FastEthernet0/12",
+   "FastEthernet0/13",
+   "FastEthernet0/14",
+   "FastEthernet0/15",
+   "FastEthernet0/16",
+   "FastEthernet0/17",
+   "FastEthernet0/18",
+   "FastEthernet0/19",
+   "FastEthernet0/2",
+   "FastEthernet0/20",
+   "FastEthernet0/21",
+   "FastEthernet0/22",
+   "FastEthernet0/23",
+   "FastEthernet0/24",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet0/7",
+   "FastEthernet0/8",
+   "FastEthernet0/9",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/10",
+   "FastEthernet1/11",
+   "FastEthernet1/12",
+   "FastEthernet1/13",
+   "FastEthernet1/14",
+   "FastEthernet1/15",
+   "FastEthernet1/16",
+   "FastEthernet1/17",
+   "FastEthernet1/18",
+   "FastEthernet1/19",
+   "FastEthernet1/2",
+   "FastEthernet1/20",
+   "FastEthernet1/21",
+   "FastEthernet1/22",
+   "FastEthernet1/23",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "FastEthernet1/5",
+   "FastEthernet1/6",
+   "FastEthernet1/7",
+   "FastEthernet1/8",
+   "FastEthernet1/9",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet2/0",
+   "GigabitEthernet2/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "FastEthernet0/1": 27,
+   "FastEthernet0/2": 22,
+   "FastEthernet0/3": 21,
+   "FastEthernet0/4": 9,
+   "FastEthernet0/5": 9,
+   "FastEthernet0/6": 6,
+   "FastEthernet0/7": 1,
+   "FastEthernet0/8": 1,
+   "GigabitEthernet0/1": 5
+  }
+ },
+ "3560-24PS": {
+  "files": 23,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/10",
+   "FastEthernet0/11",
+   "FastEthernet0/12",
+   "FastEthernet0/13",
+   "FastEthernet0/14",
+   "FastEthernet0/15",
+   "FastEthernet0/16",
+   "FastEthernet0/17",
+   "FastEthernet0/18",
+   "FastEthernet0/19",
+   "FastEthernet0/2",
+   "FastEthernet0/20",
+   "FastEthernet0/21",
+   "FastEthernet0/22",
+   "FastEthernet0/23",
+   "FastEthernet0/24",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet0/7",
+   "FastEthernet0/8",
+   "FastEthernet0/9",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/10",
+   "FastEthernet1/11",
+   "FastEthernet1/12",
+   "FastEthernet1/13",
+   "FastEthernet1/14",
+   "FastEthernet1/15",
+   "FastEthernet1/16",
+   "FastEthernet1/17",
+   "FastEthernet1/18",
+   "FastEthernet1/19",
+   "FastEthernet1/2",
+   "FastEthernet1/20",
+   "FastEthernet1/21",
+   "FastEthernet1/22",
+   "FastEthernet1/23",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "FastEthernet1/5",
+   "FastEthernet1/6",
+   "FastEthernet1/7",
+   "FastEthernet1/8",
+   "FastEthernet1/9",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "FastEthernet0/1": 4,
+   "FastEthernet0/2": 4,
+   "FastEthernet0/3": 3,
+   "GigabitEthernet0/1": 1,
+   "GigabitEthernet0/2": 3
+  }
+ },
+ "3650-24PS": {
+  "files": 2,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGi",
+  "start_index": 1,
+  "ports": [
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/10",
+   "GigabitEthernet0/11",
+   "GigabitEthernet0/12",
+   "GigabitEthernet0/13",
+   "GigabitEthernet0/14",
+   "GigabitEthernet0/15",
+   "GigabitEthernet0/16",
+   "GigabitEthernet0/17",
+   "GigabitEthernet0/18",
+   "GigabitEthernet0/19",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/20",
+   "GigabitEthernet0/21",
+   "GigabitEthernet0/22",
+   "GigabitEthernet0/23",
+   "GigabitEthernet0/24",
+   "GigabitEthernet0/25",
+   "GigabitEthernet0/26",
+   "GigabitEthernet0/27",
+   "GigabitEthernet0/28",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet0/5",
+   "GigabitEthernet0/6",
+   "GigabitEthernet0/7",
+   "GigabitEthernet0/8",
+   "GigabitEthernet0/9",
+   "GigabitEthernet2/0",
+   "GigabitEthernet2/1",
+   "GigabitEthernet2/10",
+   "GigabitEthernet2/11",
+   "GigabitEthernet2/12",
+   "GigabitEthernet2/13",
+   "GigabitEthernet2/14",
+   "GigabitEthernet2/15",
+   "GigabitEthernet2/16",
+   "GigabitEthernet2/17",
+   "GigabitEthernet2/18",
+   "GigabitEthernet2/19",
+   "GigabitEthernet2/2",
+   "GigabitEthernet2/20",
+   "GigabitEthernet2/21",
+   "GigabitEthernet2/22",
+   "GigabitEthernet2/23",
+   "GigabitEthernet2/24",
+   "GigabitEthernet2/25",
+   "GigabitEthernet2/26",
+   "GigabitEthernet2/27",
+   "GigabitEthernet2/3",
+   "GigabitEthernet2/4",
+   "GigabitEthernet2/5",
+   "GigabitEthernet2/6",
+   "GigabitEthernet2/7",
+   "GigabitEthernet2/8",
+   "GigabitEthernet2/9",
+   "GigabitEthernet3/0",
+   "GigabitEthernet3/1",
+   "GigabitEthernet3/10",
+   "GigabitEthernet3/11",
+   "GigabitEthernet3/12",
+   "GigabitEthernet3/13",
+   "GigabitEthernet3/14",
+   "GigabitEthernet3/15",
+   "GigabitEthernet3/16",
+   "GigabitEthernet3/17",
+   "GigabitEthernet3/18",
+   "GigabitEthernet3/19",
+   "GigabitEthernet3/2",
+   "GigabitEthernet3/20",
+   "GigabitEthernet3/21",
+   "GigabitEthernet3/22",
+   "GigabitEthernet3/23",
+   "GigabitEthernet3/3",
+   "GigabitEthernet3/4",
+   "GigabitEthernet3/5",
+   "GigabitEthernet3/6",
+   "GigabitEthernet3/7",
+   "GigabitEthernet3/8",
+   "GigabitEthernet3/9",
+   "GigabitEthernet4/0",
+   "GigabitEthernet4/1",
+   "GigabitEthernet4/2",
+   "GigabitEthernet4/3"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "3702i": {
+  "files": 1,
+  "signature": "eCopperGigabitEthernet,eAccessPointWirelessN|eCopperGigabitEthernet,eAccessPointWirelessN",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "5505": {
+  "files": 11,
+  "signature": "eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet|eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet,eCopperEthernet|",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0",
+   "Ethernet1",
+   "Ethernet2",
+   "Ethernet3",
+   "Ethernet4",
+   "Ethernet5",
+   "Ethernet6",
+   "Ethernet7"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "5506-X": {
+  "files": 1,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitManagement|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopper",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet0/5",
+   "GigabitEthernet0/6",
+   "GigabitEthernet0/7",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3",
+   "GigabitEthernet1/4",
+   "GigabitEthernet1/5",
+   "GigabitEthernet1/6",
+   "GigabitEthernet1/7"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "7960": {
+  "files": 12,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet|eCopperFastEthernet,eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet1/0",
+   "FastEthernet1/1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "819HG-4G-IOX": {
+  "files": 8,
+  "signature": "eCopperGigabitEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eSerial,eCopperEthernet,,|eCopperGigabitEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eSerial,eCopperEthernet,,|eCopperEthernet,eCopperEthernet|eCopperEthernet|eCopperEthernet",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0/0",
+   "Ethernet1/0",
+   "Ethernet2/0",
+   "Ethernet2/1",
+   "Ethernet3/0",
+   "Ethernet4/0",
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/2",
+   "FastEthernet1/3",
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "819HGW": {
+  "files": 11,
+  "signature": "eCopperGigabitEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eSerial,,,|eCopperGigabitEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eSerial,,,|eCopperGigabitEthernet,eAccessPointWirelessN,eAccessPointWirelessN|eCopperGigabitEthernet,eAccessPointWirelessN,eAccessPointWirelessN",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/2",
+   "FastEthernet1/3",
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0",
+   "GigabitEthernet2/0",
+   "GigabitEthernet3/0",
+   "Port 0",
+   "Port 1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "829": {
+  "files": 2,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,,,eCopperGigabitEthernet,,|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,,,eCopperGigabitEthernet,,|eCopperEthernet,eCopperEthernet|eCopperEthernet|eCopperEthernet|eCopperGigabitEthernet,eAccessPointWirelessN,eAccess",
+  "start_index": 0,
+  "ports": [
+   "Ethernet2/0",
+   "Ethernet2/1",
+   "Ethernet3/0",
+   "Ethernet3/1",
+   "Ethernet4/0",
+   "Ethernet5/0",
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet0/5",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3",
+   "GigabitEthernet1/4",
+   "GigabitEthernet1/5",
+   "GigabitEthernet5/0",
+   "GigabitEthernet6/0",
+   "GigabitEthernet7/0",
+   "Port 0",
+   "Port 1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "AccessPoint-PT": {
+  "files": 3,
+  "signature": "eCopperFastEthernet,eAccessPointWirelessG|eCopperFastEthernet|eAccessPointWirelessG",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "Port 0": 1
+  }
+ },
+ "AccessPoint-PT-A": {
+  "files": 3,
+  "signature": "eCopperFastEthernet,eAccessPointWirelessA|eCopperFastEthernet|eAccessPointWirelessA",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "AccessPoint-PT-AC": {
+  "files": 1,
+  "signature": "eCopperGigabitEthernet,eAccessPointWirelessAC|eCopperGigabitEthernet|eAccessPointWirelessAC",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "AccessPoint-PT-N": {
+  "files": 2,
+  "signature": "eCopperFastEthernet,eAccessPointWirelessN|eCopperFastEthernet|eAccessPointWirelessN",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Air Conditioner": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Air Cooler": {
+  "files": 3,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Analog-Phone-PT": {
+  "files": 3,
+  "signature": "eModem|eModem",
+  "start_index": 0,
+  "ports": [],
+  "naming": "special",
+  "observed_names": {}
+ },
+ "Appliance(0)": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Atm Pressure Monitor(0)": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Battery": {
+  "files": 4,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||||||||||||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "D1",
+   "D2",
+   "D3",
+   "D4",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 4,
+   "D1": 1,
+   "D2": 1,
+   "D3": 1,
+   "D4": 1,
+   "FastEthernet0": 1
+  }
+ },
+ "Beacon": {
+  "files": 2,
+  "signature": "||||||||||||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Bluetooth Speaker": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Bridge-PT": {
+  "files": 2,
+  "signature": "eCopperEthernet,eCopperEthernet|eCopperEthernet|eCopperEthernet",
+  "start_index": 1,
+  "ports": [
+   "Ethernet0",
+   "Ethernet1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "CGR1240": {
+  "files": 3,
+  "signature": "eCopperGigabitEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eAccessPointWirelessN|eCopperGigabitEthernet|||eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eAccessPointWirelessN|",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet3/0",
+   "FastEthernet3/1",
+   "FastEthernet3/2",
+   "FastEthernet3/3",
+   "FastEthernet4/0",
+   "FastEthernet4/1",
+   "FastEthernet4/2",
+   "FastEthernet4/3",
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet1/0",
+   "GigabitEthernet3/0",
+   "GigabitEthernet3/1",
+   "GigabitEthernet4/0",
+   "GigabitEthernet4/1",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "CO Detector": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "CO2 Detector": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Cable-Modem-PT": {
+  "files": 2,
+  "signature": "eCopperCoaxial,eCopperFastEthernet|eCopperCoaxial|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "Coaxial0/0",
+   "Coaxial1/0",
+   "FastEthernet0/0",
+   "FastEthernet2/0"
+  ],
+  "naming": "special",
+  "observed_names": {}
+ },
+ "Carbon Dioxide Detector": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Carbon Monoxide Detector": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Cell-Tower": {
+  "files": 15,
+  "signature": "eCopperCoaxial,|eCopperCoaxial|",
+  "start_index": 0,
+  "ports": [
+   "Coaxial0",
+   "Coaxial0/0",
+   "Coaxial1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Coaxial0": 2
+  }
+ },
+ "Central-Office-Server": {
+  "files": 12,
+  "signature": "eCopperFastEthernet,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,|eCopperFastEthernet,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,eCopperCoaxial,",
+  "start_index": 0,
+  "ports": [
+   "Backbone",
+   "Coaxial0/0",
+   "Coaxial0/1",
+   "Coaxial0/2",
+   "Coaxial0/3",
+   "Coaxial0/4",
+   "Coaxial0/5",
+   "Coaxial1/0",
+   "Coaxial1/1",
+   "Coaxial1/2",
+   "Coaxial1/3",
+   "Coaxial1/4",
+   "Coaxial1/5",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Backbone": 2,
+   "Coaxial0/0": 2
+  }
+ },
+ "Cloud-PT": {
+  "files": 12,
+  "signature": "eSerial,eSerial,eSerial,eSerial,eModem,eModem,eCopperEthernet,eCopperCoaxial|eSerial|eSerial|eSerial|eSerial|eModem|eModem|eCopperEthernet|eCopperCoaxial",
+  "start_index": 0,
+  "ports": [
+   "Coaxial0/0",
+   "Coaxial8/0",
+   "Ethernet0",
+   "Ethernet6",
+   "Modem4"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Ethernet6": 2,
+   "Modem4": 1
+  }
+ },
+ "Cloud-PT-Empty": {
+  "files": 1,
+  "signature": "",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "CoAxialSplitter-PT": {
+  "files": 2,
+  "signature": "eCopperCoaxial,eCopperCoaxial,eCopperCoaxial|eCopperCoaxial|eCopperCoaxial|eCopperCoaxial",
+  "start_index": 0,
+  "ports": [
+   "Coaxial0/0",
+   "Coaxial0/1",
+   "Coaxial0/2",
+   "Coaxial1/0",
+   "Coaxial2/0",
+   "Coaxial3/0"
+  ],
+  "naming": "special",
+  "observed_names": {}
+ },
+ "DLC100": {
+  "files": 5,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eAccessPointWirelessN|eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eAccessPointWirelessN",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/2",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "Port 0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "DSL-Modem-PT": {
+  "files": 2,
+  "signature": "eModem,eCopperFastEthernet|eModem|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet2/0",
+   "Port 0",
+   "Port 1"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Port 0": 1,
+   "Port 1": 1
+  }
+ },
+ "Door": {
+  "files": 11,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1,
+   "FastEthernet0": 1
+  }
+ },
+ "Fan": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Fire Monitor": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Fire Sprinkler": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Flex Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Furnace": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Garage Door": {
+  "files": 7,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1,
+   "FastEthernet0": 2
+  }
+ },
+ "Generic Environment Sensor": {
+  "files": 1,
+  "signature": "||||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Heating Element": {
+  "files": 2,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Home Speaker": {
+  "files": 4,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "A0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 2
+  }
+ },
+ "Home-VoIP-PT": {
+  "files": 3,
+  "signature": "eCopperFastEthernet,eModem|eCopperFastEthernet,eModem",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "HomeRouter-PT-AC": {
+  "files": 9,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eAccessPointWirelessN,eAccessPointWirelessN,eAccessPointWirelessAC,eAccessPointWirelessAC,eAccessPointWirelessAC,eAccessPointWirelessAC,eHostWirelessN|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eAccessPointWireles",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet 1",
+   "GigabitEthernet 2",
+   "GigabitEthernet 3",
+   "GigabitEthernet 4",
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3",
+   "GigabitEthernet1/4",
+   "Internet",
+   "Port 0",
+   "Port 1",
+   "Port 2",
+   "Port 3",
+   "Port 4",
+   "Port 5"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "GigabitEthernet 1": 6,
+   "GigabitEthernet 2": 4,
+   "GigabitEthernet 3": 2,
+   "GigabitEthernet 4": 3,
+   "Internet": 4
+  }
+ },
+ "Hub-PT": {
+  "files": 9,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet1",
+   "FastEthernet1/0",
+   "FastEthernet2",
+   "FastEthernet2/0",
+   "FastEthernet3/0",
+   "FastEthernet4/0",
+   "FastEthernet5/0",
+   "FastEthernet6/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 2,
+   "FastEthernet1": 2,
+   "FastEthernet2": 2
+  }
+ },
+ "Humidifier": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Humidity Monitor": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Humiture Monitor": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Humiture Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "A0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 1
+  }
+ },
+ "IE-2000": {
+  "files": 25,
+  "signature": ",,,,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet||,,,,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet0/7",
+   "FastEthernet0/8",
+   "FastEthernet2/0",
+   "FastEthernet2/1",
+   "FastEthernet2/2",
+   "FastEthernet2/3",
+   "FastEthernet2/4",
+   "FastEthernet2/5",
+   "FastEthernet2/6",
+   "FastEthernet2/7",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet2/0",
+   "GigabitEthernet2/1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "ISR4321": {
+  "files": 3,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0/0",
+   "GigabitEthernet0/0/1",
+   "GigabitEthernet0/1/0",
+   "GigabitEthernet0/1/1",
+   "GigabitEthernet0/2/0",
+   "GigabitEthernet0/2/1"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "GigabitEthernet0/0/0": 2,
+   "GigabitEthernet0/0/1": 1
+  }
+ },
+ "ISR4331": {
+  "files": 3,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0/0",
+   "GigabitEthernet0/0/1",
+   "GigabitEthernet0/0/2",
+   "GigabitEthernet0/1/0",
+   "GigabitEthernet0/1/1",
+   "GigabitEthernet0/1/2",
+   "GigabitEthernet0/2/0",
+   "GigabitEthernet0/2/1",
+   "GigabitEthernet0/2/2"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "GigabitEthernet0/0/0": 2,
+   "GigabitEthernet0/0/1": 1
+  }
+ },
+ "LAP-PT": {
+  "files": 21,
+  "signature": "eCopperGigabitEthernet,eAccessPointWirelessN|eCopperGigabitEthernet,eAccessPointWirelessN|",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0",
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0",
+   "Port 0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "GigabitEthernet0": 5
+  }
+ },
+ "LCD": {
+  "files": 13,
+  "signature": "||||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 2
+  }
+ },
+ "LED": {
+  "files": 24,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Laptop-PT": {
+  "files": 8,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 3
+  }
+ },
+ "Lawn Sprinkler": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1,
+   "FastEthernet0": 1
+  }
+ },
+ "Light": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Light(0)": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Linksys-WRT300N": {
+  "files": 12,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eAccessPointWirelessN|eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eAccessPointWirelessN",
+  "start_index": 0,
+  "ports": [
+   "Ethernet 1",
+   "Ethernet 4",
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet1/2",
+   "FastEthernet1/3",
+   "FastEthernet1/4",
+   "Internet",
+   "Port 0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "Ethernet 1": 1,
+   "Ethernet 4": 1,
+   "Internet": 4
+  }
+ },
+ "MCU-PT": {
+  "files": 31,
+  "signature": "||||||||||||",
+  "start_index": 0,
+  "ports": [
+   "A0",
+   "D0",
+   "FastEthernet0/0",
+   "FastEthernet1/0",
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 2,
+   "D0": 4
+  }
+ },
+ "Membrane Potentiometer": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Meraki-MX65W": {
+  "files": 8,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,,,eAccessPointWirelessAC|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopper",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet 3",
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet0/5",
+   "GigabitEthernet0/6",
+   "GigabitEthernet0/7",
+   "GigabitEthernet0/8",
+   "GigabitEthernet0/9",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3",
+   "GigabitEthernet1/4",
+   "GigabitEthernet1/5",
+   "GigabitEthernet1/6",
+   "GigabitEthernet1/7",
+   "GigabitEthernet1/8",
+   "GigabitEthernet1/9",
+   "Internet 1",
+   "Port 0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "GigabitEthernet 3": 7,
+   "Internet 1": 7
+  }
+ },
+ "Meraki-Server": {
+  "files": 8,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 7
+  }
+ },
+ "Metal Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Motion Detector": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Motion Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Motor": {
+  "files": 2,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "NetworkController": {
+  "files": 8,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0",
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet2/0",
+   "GigabitEthernet2/1"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "GigabitEthernet0": 4
+  }
+ },
+ "Old Car": {
+  "files": 8,
+  "signature": "||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "PC-PT": {
+  "files": 299,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 84
+  }
+ },
+ "Photo Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Piezo Speaker": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Portable Music Player": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Potentiometer": {
+  "files": 24,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "A0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 7
+  }
+ },
+ "Power Distribution Device": {
+  "files": 99,
+  "signature": "",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Power Meter": {
+  "files": 4,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "D1",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 4,
+   "D1": 4,
+   "FastEthernet0": 1
+  }
+ },
+ "Printer-PT": {
+  "files": 4,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 3
+  }
+ },
+ "Push Button": {
+  "files": 13,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Push Button Toggle Switch": {
+  "files": 1,
+  "signature": "||||||||||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "RFID Card": {
+  "files": 2,
+  "signature": "||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "RFID Reader": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "RGB LED": {
+  "files": 3,
+  "signature": "|||||",
+  "start_index": 0,
+  "ports": [
+   "A0",
+   "A1",
+   "A2"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 1,
+   "A1": 1,
+   "A2": 1
+  }
+ },
+ "Repeater-PT": {
+  "files": 1,
+  "signature": "eCopperEthernet,eCopperEthernet|eCopperEthernet|eCopperEthernet",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0",
+   "Ethernet1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Rocker Switch": {
+  "files": 2,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "Rocker Switch(0)": {
+  "files": 2,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Router-PT": {
+  "files": 9,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eSerial,eSerial,eFiberFastEthernet,eFiberFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eSerial|eSerial|eFiberFastEthernet|eFiberFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet1/0",
+   "FastEthernet2/0",
+   "FastEthernet5/0",
+   "FastEthernet6/0"
+  ],
+  "naming": "standard",
+  "observed_names": {
+   "FastEthernet0/0": 4,
+   "FastEthernet1/0": 4
+  }
+ },
+ "Router-PT-Empty": {
+  "files": 1,
+  "signature": "",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "SBC-PT": {
+  "files": 24,
+  "signature": "eHostWirelessAC|||||||||||||eHostWirelessAC",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "Ethernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 1
+  }
+ },
+ "SMARTPHONE-PT": {
+  "files": 19,
+  "signature": "eHostWirelessN,|eHostWirelessN|",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Server-PT": {
+  "files": 161,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 27
+  }
+ },
+ "Servo": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Signal Generator": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||||||||||||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Siren": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Smart LED": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "A0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 1
+  }
+ },
+ "Smoke Detector": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Smoke Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Sniffer": {
+  "files": 5,
+  "signature": "eCopperEthernet,eCopperEthernet|eCopperEthernet|eCopperEthernet",
+  "start_index": 0,
+  "ports": [
+   "Ethernet0",
+   "Ethernet1"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Solar Panel": {
+  "files": 2,
+  "signature": "eCopperGigabitEthernet|eCopperGigabitEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "GigabitEthernet0",
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 2,
+   "GigabitEthernet0": 1
+  }
+ },
+ "Sound Frequency Detector": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Sound Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [
+   "A0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "A0": 1
+  }
+ },
+ "Speaker": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Street Lamp": {
+  "files": 4,
+  "signature": "eHostWirelessN|eHostWirelessN||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Switch-PT": {
+  "files": 2,
+  "signature": "eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eCopperFastEthernet,eFiberFastEthernet,eFiberFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eCopperFastEthernet|eFiberFastEthernet|eFiberFastEthernet",
+  "start_index": 1,
+  "ports": [
+   "FastEthernet0/1",
+   "FastEthernet0/2",
+   "FastEthernet0/3",
+   "FastEthernet0/4",
+   "FastEthernet0/5",
+   "FastEthernet0/6",
+   "FastEthernet1/0",
+   "FastEthernet1/1",
+   "FastEthernet2/0",
+   "FastEthernet2/1",
+   "FastEthernet3/0",
+   "FastEthernet4/0",
+   "FastEthernet5/0",
+   "FastEthernet6/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0/1": 1,
+   "FastEthernet1/1": 1,
+   "FastEthernet2/1": 1
+  }
+ },
+ "Switch-PT-Empty": {
+  "files": 1,
+  "signature": "",
+  "start_index": 1,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "TV-PT": {
+  "files": 2,
+  "signature": "eCopperCoaxial|eCopperCoaxial",
+  "start_index": 0,
+  "ports": [
+   "Coaxial0/0",
+   "Coaxial1/0"
+  ],
+  "naming": "special",
+  "observed_names": {}
+ },
+ "TabletPC-PT": {
+  "files": 2,
+  "signature": "eHostWirelessN,|eHostWirelessN|",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Temperature Monitor": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Temperature Sensor": {
+  "files": 2,
+  "signature": "||||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Thermostat": {
+  "files": 3,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||||",
+  "start_index": 0,
+  "ports": [
+   "D1",
+   "D2",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D1": 2,
+   "D2": 2,
+   "FastEthernet0": 1
+  }
+ },
+ "Thing": {
+  "files": 8,
+  "signature": "||||||||||||",
+  "start_index": 0,
+  "ports": [
+   "D0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 5
+  }
+ },
+ "Toggle Push Button": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Trip Sensor": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "Trip Wire": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "WLC-2504": {
+  "files": 7,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "WLC-3504": {
+  "files": 5,
+  "signature": "eCopperGigabitEthernet,eCopperGigabitEthernet,,,eCopperGigabitEthernet|eCopperGigabitEthernet,eCopperGigabitEthernet,,,eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet0/1",
+   "GigabitEthernet0/2",
+   "GigabitEthernet0/3",
+   "GigabitEthernet0/4",
+   "GigabitEthernet1",
+   "GigabitEthernet1/0",
+   "GigabitEthernet1/1",
+   "GigabitEthernet1/2",
+   "GigabitEthernet1/3",
+   "GigabitEthernet1/4"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "GigabitEthernet1": 4
+  }
+ },
+ "WLC-PT": {
+  "files": 8,
+  "signature": "eCopperGigabitEthernet|eCopperGigabitEthernet",
+  "start_index": 0,
+  "ports": [
+   "GigabitEthernet0/0",
+   "GigabitEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Water Drain": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Water Level Monitor": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Water Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Webcam": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Wind Detector": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Wind Sensor": {
+  "files": 1,
+  "signature": "|||",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "Wind Turbine": {
+  "files": 2,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "D0",
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "D0": 2,
+   "FastEthernet0": 1
+  }
+ },
+ "Window": {
+  "files": 5,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet|||",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0",
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "special",
+  "observed_names": {
+   "FastEthernet0": 1
+  }
+ },
+ "WiredEndDevice-PT": {
+  "files": 1,
+  "signature": "eCopperFastEthernet|eCopperFastEthernet",
+  "start_index": 0,
+  "ports": [
+   "FastEthernet0/0",
+   "FastEthernet1/0"
+  ],
+  "naming": "standard",
+  "observed_names": {}
+ },
+ "WirelessEndDevice-PT": {
+  "files": 1,
+  "signature": "eHostWirelessG|eHostWirelessG",
+  "start_index": 0,
+  "ports": [],
+  "naming": "standard",
+  "observed_names": {}
+ }
+}

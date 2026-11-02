@@ -456,14 +456,24 @@ def main(argv=None) -> int:
     ap.add_argument("--template", default="a.xml",
                     help="decrypted donor XML or .pkt file with example devices")
     ap.add_argument("--xml-only", action="store_true", help="write plain XML instead of .pkt")
+    ap.add_argument("--no-validate", action="store_true",
+                    help="skip semantic validation of the spec")
     args = ap.parse_args(argv)
 
     spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
     tpl_path = Path(args.template)
     if tpl_path.suffix.lower() in (".pkt", ".pka"):
-        template_xml = pt_tool.decrypt_pkt(tpl_path.read_bytes())
+        template_xml = pt_tool.decrypt_pkt_auto(tpl_path.read_bytes())
     else:
         template_xml = tpl_path.read_bytes()
+
+    if not args.no_validate:
+        import validate as _v
+        _v.PROBLEMS.clear()
+        rc = _v.main([args.spec, "--donor", str(tpl_path), "--max-warnings", "5"])
+        if rc != 0:
+            print("\nсборка отменена: исправьте ошибки спеки (или --no-validate)")
+            return rc
 
     xml = build(spec, template_xml)
     out = Path(args.output)
