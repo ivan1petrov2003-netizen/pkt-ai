@@ -48,8 +48,9 @@ def parse_dev_config(dev) -> dict:
 
 
 def iface_state(lines: list[str]) -> dict:
-    """Строки одного интерфейса → {mode: access|trunk, vlan: int, subif_vlan: int|None, ip, up}."""
-    st = {"mode": None, "vlan": None, "dot1q": None, "ip": None, "shutdown": False}
+    """Строки одного интерфейса → {mode, vlan, allowed, dot1q, ip, shutdown}."""
+    st = {"mode": None, "vlan": None, "allowed": None, "dot1q": None,
+          "ip": None, "shutdown": False}
     for t in lines:
         low = t.lower()
         if "shutdown" in low and not low.startswith("no "):
@@ -67,6 +68,21 @@ def iface_state(lines: list[str]) -> dict:
         m = re.search(r"switchport access vlan (\d+)", low)
         if m:
             st["vlan"] = int(m.group(1))
+        m = re.search(r"switchport trunk allowed vlan(?:\s+add)?\s+(.+)$", low)
+        if m:
+            vlans: set[int] = set()
+            for part in m.group(1).replace("all", "").split(","):
+                part = part.strip()
+                if "-" in part:
+                    try:
+                        a, b = part.split("-")
+                        vlans.update(range(int(a), int(b) + 1))
+                    except ValueError:
+                        pass
+                elif part.isdigit():
+                    vlans.add(int(part))
+            if vlans:
+                st["allowed"] = vlans if st["allowed"] is None else st["allowed"] | vlans
         m = re.search(r"encapsulation dot1q (\d+)", low)
         if m:
             st["dot1q"] = int(m.group(1))
@@ -151,8 +167,8 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
         adj.setdefault(b, {}).setdefault(ports[1], []).append((a, ports[0]))
 
     # --- эффективный VLAN порта свитча ---
-    def switch_port_vlan(dev_name: str, port: str, seen=None) -> int | None:
-        """VLAN, в котором порт свитча; None — порт не свитчевый/не найден."""
+    def switch_port_vlan(dev_name: str, port: str, seen=None):
+        """None — порт мёртв; ("access", vlan) или ("trunk", allowed|None)."""
         seen = seen or set()
         if (dev_name, port) in seen:
             return None
@@ -164,13 +180,13 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
         if st["shutdown"]:
             return None
         if st["mode"] == "trunk":
-            return "trunk"
+            return ("trunk", st["allowed"])
         vlan = st["vlan"] or 1
         if vlan not in d["vlans_db"]:
             problems.append(f"[{dev_name}] порт {port}: access vlan {vlan}, "
                             f"но VLAN {vlan} нет в vlan.dat → порт мёртв")
             return None
-        return vlan
+        return ("access", vlan)
 
     def router_if_vlan(dev_name: str, port: str) -> tuple[int | None, dict]:
         """(VLAN сабинтерфейса/главного, state) для порта роутера.
@@ -207,7 +223,12 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
                     v = switch_port_vlan(dv, np2)
                     if v is None:
                         continue
-                    if v == "trunk" or v == vlan:
+                    kind, payload = v
+                    ok = (payload == "trunk") if kind == "trunk" else (
+                        payload == vlan if isinstance(vlan, int) else True)
+                    if kind == "trunk":
+                        ok = payload is None or (isinstance(vlan, int) and vlan in payload)
+                    if ok:
                         for (nd, ndp) in adj[dv][np2]:
                             out.add(nd)
                             stack.append((nd, ndp))
@@ -221,7 +242,12 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
                     v = switch_port_vlan(nd, np_)
                     if v is None:
                         continue
-                    if v == "trunk" or v == vlan:
+                    kind, payload = v
+                    if kind == "trunk":
+                        ok = payload is None or (isinstance(vlan, int) and vlan in payload)
+                    else:
+                        ok = payload == vlan
+                    if ok:
                         out.add(nd)
                         stack.append((nd, np_))
                 elif nd_dev["kind"] == "router":
@@ -275,8 +301,8 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
                 nd_dev = devs.get(nd)
                 if nd_dev and nd_dev["kind"] == "switch":
                     v = switch_port_vlan(nd, np_)
-                    if isinstance(v, int):
-                        start_vlan = v
+                    if v and v[0] == "access":
+                        start_vlan = v[1]
             reachable |= l2_reachable(h, hp, start_vlan)
 
         # ищем роутер с IP=шлюз среди L2-достижимых (учитывая VLAN хоста=1)
