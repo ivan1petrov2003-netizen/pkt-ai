@@ -16,7 +16,7 @@
 - **Фаза 4 готова:** MCP-сервер (`service/mcp_server.py`, FastMCP v1, `mcp>=1,<2`):
   build_pkt / validate_ir / inventory / pkt_inspect — все 4 протестированы.
 - validate.py отрефакторен: core-функция `validate_spec()` переиспользуется сервисом.
-- Докуменatация: service/README.md (запуск, ключи, подключение Claude Desktop),
+- Документация: service/README.md (запуск, ключи, подключение Claude Desktop),
   docs/ACCEPTANCE.md (чеклист приёмки).
 
 **Что осталось до «идеальной вершины»:**
