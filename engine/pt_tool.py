@@ -308,15 +308,10 @@ class EAX:
         return bytes(a ^ b ^ c for a, b, c in zip(self.np, cp, self.hp))
 
     def _ctr(self, data: bytes) -> bytes:
-        out = bytearray(len(data))
-        ctr = int.from_bytes(self.np, "big")
-        limit = 1 << 128
-        for i in range(0, len(data), 16):
-            stream = self.c.encrypt_block(ctr.to_bytes(16, "big"))
-            chunk = data[i:i + 16]
-            out[i:i + len(chunk)] = bytes(a ^ b for a, b in zip(chunk, stream))
-            ctr = (ctr + 1) % limit
-        return bytes(out)
+        # keystream для фиксированных KEY/IV детерминирован и кешируется модулем:
+        # вместо 65k encrypt_block на 1 МБ — один int-XOR (ускорение x100 на повторах)
+        ks = _keystream(self.np, len(data))
+        return _int_xor(data, ks)
 
     def encrypt(self, plaintext: bytes) -> bytes:
         ct = self._ctr(plaintext)
@@ -338,32 +333,65 @@ class EAX:
 PT_KEY = bytes([0x89]) * 16
 PT_IV = bytes([0x10]) * 16
 
+# Кеш CTR-keystream: ключ/IV фиксированы, поэтому поток для первых N байт всегда
+# одинаков. Растёт лениво; экономит тысячи encrypt_block на каждую операцию.
+_KS_CACHE = bytearray()
+_KS_NP = None
+
+
+def _int_xor(a: bytes, b: bytes) -> bytes:
+    return (int.from_bytes(a, "big") ^ int.from_bytes(b, "big")).to_bytes(len(a), "big")
+
+
+def _keystream(np: bytes, n: int) -> bytes:
+    global _KS_CACHE, _KS_NP
+    if _KS_NP == np and len(_KS_CACHE) >= n:
+        return bytes(_KS_CACHE[:n])
+    cipher = Twofish(PT_KEY)
+    ctr0 = int.from_bytes(np, "big")
+    mask = (1 << 128) - 1
+    out = bytearray()
+    for b in range((n + 15) // 16):
+        out += cipher.encrypt_block(((ctr0 + b) & mask).to_bytes(16, "big"))
+    _KS_CACHE = out
+    _KS_NP = np
+    return bytes(_KS_CACHE[:n])
+
+
+def _pattern_key(start: int, step: int, n: int) -> bytes:
+    """Арифметический байтовый ключ длины n: k[i] = (start + step*i) & 0xFF.
+    Генерация O(256) + размножение — C-уровень, вместо O(n) питоновского цикла."""
+    pattern = bytes((start + step * j) & 0xFF for j in range(256))
+    reps = n // 256 + 1
+    return (pattern * reps)[:n]
+
+
+def _int_xor(a: bytes, b: bytes) -> bytes:
+    """XOR двух равных по длине буферов через big-int (C-уровень)."""
+    return (int.from_bytes(a, "big") ^ int.from_bytes(b, "big")).to_bytes(len(a), "big")
+
 
 def _stage1(data: bytes) -> bytes:
-    """Reverse XOR obfuscation."""
+    """Reverse XOR obfuscation: out[i] = data[n-1-i] ^ ((n*(1-i)) & 0xFF)."""
     n = len(data)
-    out = bytearray(n)
-    for i in range(n):
-        out[i] = data[n - i - 1] ^ ((n - i * n) & 0xFF)
-    return bytes(out)
+    # ключ — прогрессия с шагом (-n) mod 256, начиная с n&255
+    key = _pattern_key(n & 0xFF, (-n) & 0xFF, n)
+    return _int_xor(data[::-1], key)
 
 
 def _stage1_inv(data: bytes) -> bytes:
     """Inverse of :func:`_stage1` (used when packing a file)."""
     n = len(data)
-    out = bytearray(n)
-    for i in range(n):
-        out[n - 1 - i] = data[i] ^ ((n - i * n) & 0xFF)
-    return bytes(out)
+    key = _pattern_key(n & 0xFF, (-n) & 0xFF, n)
+    xored = _int_xor(data, key)
+    return xored[::-1]
 
 
 def _stage3(data: bytes) -> bytes:
-    """XOR obfuscation (self-inverse)."""
+    """XOR obfuscation (self-inverse): out[i] = data[i] ^ ((n-i) & 0xFF)."""
     n = len(data)
-    out = bytearray(n)
-    for i in range(n):
-        out[i] = data[i] ^ ((n - i) & 0xFF)
-    return bytes(out)
+    key = _pattern_key(n & 0xFF, 0xFF, n)  # шаг -1 mod 256
+    return _int_xor(data, key)
 
 
 def _stage4(data: bytes) -> bytes:

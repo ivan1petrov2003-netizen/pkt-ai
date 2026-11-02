@@ -86,8 +86,10 @@ def donor_device_index(donor_paths: list[Path]) -> tuple[dict[str, str], dict[st
             isr = model.upper().startswith("ISR") or model in ("4321", "4331")
             start = 1 if model in ("2950-24", "2950T-24", "2960-24TT", "3560-24PS", "3650-24PS",
                                    "Switch-PT", "Switch-PT-Empty") else 0
-            for nm in reconstruct(layout, start=start, isr=isr):
-                ports.setdefault(model, set()).add(nm)
+            host_naming = model in ("PC-PT", "Server-PT", "Laptop-PT", "Printer-PT")
+            for nm in reconstruct(layout, start=start, isr=isr, host_naming=host_naming):
+                if not nm.startswith("?unk:"):
+                    ports.setdefault(model, set()).add(nm)
     return names, ports
 
 

@@ -526,6 +526,15 @@ class Builder:
             el = cable_el.find(tag)
             if el is not None:
                 el.text = str(_next_mem())
+        # нормализация имени порта хоста: у PC/Server/Laptop/Printer видимый порт
+        # всегда FastEthernet0; LLM может написать FastEthernet0/0 → PT "Invalid File"
+        for dev_key, port_el in ((a["el"], ports[0]), (b["el"], ports[1])):
+            t = dev_key.find("ENGINE/TYPE")
+            model = (t.get("model") or "") if t is not None else ""
+            if model in ("PC-PT", "Server-PT", "Laptop-PT", "Printer-PT") and port_el.text:
+                import re as _re
+                if _re.match(r"^(Fast)?[Ee]thernet0(/\d+)?$", port_el.text.strip()):
+                    port_el.text = "FastEthernet0"
         self.out_links.append(link)
 
     @staticmethod

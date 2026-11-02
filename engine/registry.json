@@ -1360,11 +1360,9 @@
   "signature": "eCopperFastEthernet|eCopperFastEthernet|",
   "start_index": 0,
   "ports": [
-   "FastEthernet0",
-   "FastEthernet0/0",
-   "FastEthernet1/0"
+   "FastEthernet0"
   ],
-  "naming": "special",
+  "naming": "standard",
   "observed_names": {
    "FastEthernet0": 3
   }
@@ -1575,11 +1573,9 @@
   "signature": "eCopperFastEthernet|eCopperFastEthernet|",
   "start_index": 0,
   "ports": [
-   "FastEthernet0",
-   "FastEthernet0/0",
-   "FastEthernet1/0"
+   "FastEthernet0"
   ],
-  "naming": "special",
+  "naming": "standard",
   "observed_names": {
    "FastEthernet0": 84
   }
@@ -1654,11 +1650,9 @@
   "signature": "eCopperFastEthernet|eCopperFastEthernet",
   "start_index": 0,
   "ports": [
-   "FastEthernet0",
-   "FastEthernet0/0",
-   "FastEthernet1/0"
+   "FastEthernet0"
   ],
-  "naming": "special",
+  "naming": "standard",
   "observed_names": {
    "FastEthernet0": 3
   }
@@ -1804,11 +1798,9 @@
   "signature": "eCopperFastEthernet|eCopperFastEthernet",
   "start_index": 0,
   "ports": [
-   "FastEthernet0",
-   "FastEthernet0/0",
-   "FastEthernet1/0"
+   "FastEthernet0"
   ],
-  "naming": "special",
+  "naming": "standard",
   "observed_names": {
    "FastEthernet0": 27
   }

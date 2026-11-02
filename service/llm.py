@@ -62,7 +62,12 @@ def chat_openai(system: str, user: str, images: list[str] | None = None,
     data = _http_post(f"{base}/chat/completions",
                       {"Authorization": f"Bearer {key}"}, payload)
     try:
-        return data["choices"][0]["message"]["content"] or ""
+        msg = data["choices"][0]["message"]
+        content = msg.get("content") or ""
+        if not content.strip():
+            # reasoning-модели: при обрезке токенов ответ может остаться в reasoning_content
+            content = msg.get("reasoning_content") or ""
+        return content
     except (KeyError, IndexError) as e:
         raise LLMError(f"неожиданный ответ OpenAI: {e}: {str(data)[:300]}")
 

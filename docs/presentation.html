@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>pkt-ai — итоги проекта</title>
+<style>
+:root{--bg:#0f1420;--card:#1a2130;--tx:#e8ecf3;--mut:#93a0b4;--ac:#4aa3ef;--ok:#4cc38a;--bd:#2a3345}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:2rem;margin:0 0 6px}h1 span{color:var(--ac)}
+h2{font-size:1.3rem;margin:42px 0 12px;border-left:4px solid var(--ac);padding-left:12px}
+.sub{color:var(--mut);font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px 22px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.ok{color:var(--ok);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid var(--bd);padding:8px 12px;text-align:left;font-size:.95rem}
+th{color:var(--mut);font-weight:600}
+img{max-width:100%;border-radius:10px;border:1px solid var(--bd);margin:8px 0}
+code,pre{background:#111725;border-radius:8px;padding:2px 8px;font:14px Consolas,monospace}
+pre{padding:14px;overflow-x:auto}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.flow div{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 16px;font-size:.95rem}
+.flow b{color:var(--ac)}
+.arrow{color:var(--ac);font-size:1.2rem}
+</style></head><body><main>
+
+<h1>pkt<span>-ai</span> — нейросеть собирает схемы Cisco Packet Tracer</h1>
+<p class="sub">Итоги проекта · 2026-11-03 · всё проверено вживую в Packet Tracer 8.0.0.0212</p>
+
+<h2>Что получилось — одной фразой</h2>
+<div class="card">
+<p style="font-size:1.15rem;margin:0">Даёшь <b>текст задания</b> (как из методички) — получаешь <b class="ok">готовый .pkt</b>,
+который открывается в Packet Tracer, и <b class="ok">пинги ходят</b>. Проверено скриншотами ниже.
+Работает через любую нейросеть по API, через MCP (Claude) и руками через CLI.</p>
+</div>
+
+<h2>Как это устроено</h2>
+<div class="flow">
+<div>текст задания / фото</div><div class="arrow">→</div>
+<div><b>LLM</b><br>IR-JSON</div><div class="arrow">→</div>
+<div><b>Валидатор</b><br>порты·IP·VLAN·связность</div><div class="arrow">→</div>
+<div><b>Builder</b><br>клонирование из донора</div><div class="arrow">→</div>
+<div><b>Крипто</b><br>Twofish-EAX</div><div class="arrow">→</div>
+<div><b>.pkt</b></div>
+</div>
+<div class="card">Нейросеть <b>никогда не пишет XML</b> — только простое JSON-описание. XML собирает
+детерминированный сборщик из реальных записей донора (файл гарантированно открывается).
+Ошибки валидации автоматически возвращаются нейросети на исправление (repair-loop, до 3 итераций).</div>
+
+<h2>Живые доказательства (скриншоты из PT 8.0)</h2>
+<table>
+<tr><th>Лаба</th><th>Проверка</th><th>Результат</th></tr>
+<tr><td>g1 — LAN через свитч</td><td>PC1→PC2</td><td class="ok">Successful 3/3</td></tr>
+<tr><td>g2 — VLAN + trunk (router-on-a-stick)</td><td>PC-A→PC-B, меж-VLAN</td><td class="ok">Successful (1-й ARP)</td></tr>
+<tr><td>g3 — 2 роутера, статическая маршрутизация</td><td>PC1→PC2 через транзит</td><td class="ok">Successful</td></tr>
+<tr><td>g4 — 3 роутера, OSPF</td><td>PC1→PC3</td><td class="ok">Successful 3/4</td></tr>
+<tr><td>g5 — ПР№3 x17 (PAgP/LACP, VLAN 100/200/300, IPv6, AAA/SSH)</td><td>PC1→SRV01, меж-VLAN</td><td class="ok">Successful 3/4</td></tr>
+<tr><td><b>llm_e2e_lab — собрана НЕЙРОСЕТЬЮ из текста задания</b></td><td>PC1→PC2</td><td class="ok">Successful 3/3</td></tr>
+</table>
+<div class="grid">
+<div class="card"><b>g5 (ПР№3) — меж-VLAN пинг</b><br>
+<img src="evidence/g5_ping.png" alt="g5 пинг"></div>
+<div class="card"><b>Лаба, собранная нейросетью — Successful</b><br>
+<img src="evidence/llm_lab_ping.png" alt="LLM лаба пинг"></div>
+</div>
+<div class="card"><b>g4 OSPF</b><br><img src="evidence/g4_ping.png" alt="g4 пинг"></div>
+
+<h2>За одну ночь найдено и починено (дневник отладки через GUI-автоматизацию)</h2>
+<div class="card"><ol style="margin:0;padding-left:20px">
+<li><b>Наследование мусора донора</b> — свитч получал чужие VLAN → связность рвана. Фикс: чистые конфиг + VLAN-база.</li>
+<li><b>POWER=false у роутеров в донорах</b> — PT не поднимает такие порты конфигом. Фикс: нормализация питания портов.</li>
+<li><b>PT-пересохранённые доноры теряют привязку EtherChannel</b> — g5 переэкспортирован из оригинала.</li>
+<li><b>ГЛАВНОЕ: DHCP-карта донора</b> (ENGINE/DHCP_CLIENT/PORT_DATA_MAP) — запись FastEthernet0 заставляла PT включать
+DHCP на хостах, <u>игнорируя статический IP</u> → все хосты сидели на APIPA во всех файлах, включая ваш ПР№3.
+Фикс: карта чистится при сборке. Найдено через GUI-бисекцию прямо в PT 8.0.</li>
+<li><b>Порты хостов от LLM</b> («FastEthernet0/0» вместо «FastEthernet0») — реестр имён исправлен, сборщик нормализует,
+валидатор ловит, repair-loop чинит. Проверено: PT открыл LLM-лабу после фикса.</li>
+</ol></div>
+
+<h2>Скорость и надёжность</h2>
+<div class="card"><ul style="margin:0;padding-left:20px">
+<li>Криптоядро: XOR-стейджи и CTR переведены на C-уровневые операции (big-int) + кеш keystream —
+<b>расшифровка 758 КБ за 0.08 с</b>, побайтовая идентичность подтверждена кросс-проверкой с независимым TS-ядром.</li>
+<li>Реестр <b>140 моделей устройств</b> из корпуса 286 файлов; правила именования портов подтверждены корпусом (0 расхождений).</li>
+<li>Симулятор связности проверяет пинги <u>до</u> отдачи файла: L2 (VLAN/trunk/EtherChannel), L3, DHCP-карта, POWER.</li>
+<li>Тесты: крипто 6/6, API E2E 12/12, золотые лабы 5/5, LLM E2E 2/2 (включая repair-loop).</li>
+</ul></div>
+
+<h2>Как пользоваться</h2>
+<div class="card"><pre>cd C:\Users\gaming\Desktop\pkt-ai\service
+set OPENAI_API_KEY=…        # любой OpenAI-совместимый API
+set OPENAI_BASE_URL=https://plusvibeapi.ru/v1
+set OPENAI_MODEL=deepseek-v4-flash-0731:free
+python -m uvicorn app:app --port 8317     # Swagger: /docs
+POST /api/v1/labs {"task": "текст задания"}  →  готовый .pkt в out\</pre>
+<p style="margin:8px 0 0">Полная инструкция: <code>docs/USAGE.md</code> · приёмка: <code>docs/ACCEPTANCE.md</code> · план: <code>PLAN.md</code></p></div>
+
+<p class="sub">Репозиторий: C:\Users\gaming\Desktop\pkt-ai · тег v0.2.0 · 7 коммитов</p>
+</main></body></html>

@@ -122,12 +122,18 @@ SPECIAL_NAMING = {
 }
 
 
-def reconstruct(layout: list[list[str]], start: int = 0, isr: bool = False) -> list[str]:
+# Хостовые модели: у них ровно один видимый Ethernet-порт с именем FastEthernet0,
+# даже если внутри XML порт-элементов несколько (модули).
+HOST_MODELS = {"PC-PT", "Server-PT", "Laptop-PT", "Printer-PT"}
+
+
+def reconstruct(layout: list[list[str]], start: int = 0, isr: bool = False,
+                host_naming: bool = False) -> list[str]:
     """Имена портов по модульной раскладке.
 
     Роутеры: модуль 0 -> Base0/<n+start>; модуль k>0 -> Base<k>/<n>.
     ISR: Base0/<k>/<n>. Свитчи: start=1, счётчик на Base.
-    Хост (ровно один кабельный Ethernet-порт) -> 'FastEthernet0'.
+    Хост (host_naming или ровно один кабельный Ethernet) -> 'FastEthernet0'.
     Cloud (только Ethernet/Modem/Coaxial): Ethernet/Modem — 'Ethernet<n>' без слэша.
     eWireless/AP -> 'Port <n>'.
     """
@@ -136,7 +142,7 @@ def reconstruct(layout: list[list[str]], start: int = 0, isr: bool = False) -> l
         for t in mods:
             cab_all.append(BASE_TYPE.get(t))
     eth = [b for b in cab_all if b in ("FastEthernet", "GigabitEthernet", "Ethernet")]
-    single_host = eth == ["FastEthernet"]
+    single_host = eth == ["FastEthernet"] or (bool(host_naming) and eth[:1] == ["FastEthernet"])
     cloud_style = cab_all and all(b in ("Ethernet", "Modem", "Coaxial", None) for b in cab_all)
 
     names: list[str] = []
@@ -215,13 +221,15 @@ def main() -> int:
         chosen_start = 1 if is_switch else 0
         names: set[str] = set()
         for lay in layouts:
-            names.update(reconstruct(lay, start=chosen_start, isr=isr))
+            names.update(reconstruct(lay, start=chosen_start, isr=isr,
+                                     host_naming=model in HOST_MODELS))
         miss = [n for n in obs if n not in names]
         if miss:
             alt = 0 if chosen_start == 1 else 1
             alt_names: set[str] = set()
             for lay in layouts:
-                alt_names.update(reconstruct(lay, start=alt, isr=isr))
+                alt_names.update(reconstruct(lay, start=alt, isr=isr,
+                                             host_naming=model in HOST_MODELS))
             if not [n for n in obs if n not in alt_names]:
                 names, chosen_start, miss = alt_names, alt, []
 
