@@ -145,6 +145,7 @@ def reconstruct(layout: list[list[str]], start: int = 0, isr: bool = False) -> l
         for t in mods:
             base = BASE_TYPE.get(t)
             if base is None:
+                names.append("?unk:" + (t or "?"))
                 continue
             n = counters[base]
             counters[base] += 1
@@ -231,6 +232,7 @@ def main() -> int:
         if special:
             names = set(names) | set(obs)
             miss = []
+        names = {n for n in names if not n.startswith("?unk:")}
         # для standard-моделей остаточные расхождения = непокрытые корпуса имена
         # (валидатор принимает их через structural-правило); только логируем
         if miss and not special:

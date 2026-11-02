@@ -315,7 +315,51 @@ class Builder:
 
         self.out_devices.append(dev)
         self.devices_by_name[name] = {"el": dev, "ref": ref, "mem": dev_addr}
+
+        # POWER портов: донор мог хранить порты выключенными (POWER=false), а PT
+        # не поднимает их конфигом no shutdown → физически мёртвые линки.
+        # Нормализуем: POWER=true для всех кабельных портов, кроме shutdown в конфиге.
+        self._set_port_power(dev, config or [])
         return dev
+
+    @staticmethod
+    def _set_port_power(dev, config: list[str]):
+        from donor_registry import reconstruct, SWITCH_MODELS
+
+        # какие интерфейсы закрываются конфигом
+        shutdown_set: set[str] = set()
+        cur = None
+        for ln in config:
+            s = ln.strip()
+            m = re.match(r"^interface\s+(\S+)", s, re.I)
+            if m:
+                cur = m.group(1)
+                continue
+            if cur and re.match(r"^shutdown$", s, re.I):
+                shutdown_set.add(cur)
+                cur = None
+
+        t = dev.find("ENGINE/TYPE")
+        model = (t.get("model") or "") if t is not None else ""
+        modules = dev.findall(".//MODULE")
+        if modules:
+            layout = [[q.findtext("TYPE") or "" for q in m.findall(".//PORT")] for m in modules]
+            ports = [q for m in modules for q in m.findall(".//PORT")]
+        else:
+            ports = dev.findall(".//PORT")
+            layout = [[q.findtext("TYPE") or "" for q in ports]]
+        if not ports:
+            return
+        isr = model.upper().startswith("ISR") or model in ("4321", "4331")
+        start = 1 if model in SWITCH_MODELS else 0
+        names = reconstruct(layout, start=start, isr=isr)
+        for port_el, nm in zip(ports, names):
+            if nm.startswith("?unk:") or nm in ("", None):
+                continue  # некабельные (bluetooth и т.п.) — не трогаем
+            pel = port_el.find("POWER")
+            if pel is None:
+                pel = etree.SubElement(port_el, "POWER")
+            pel.text = "false" if nm in shutdown_set else "true"
 
     @staticmethod
     def _set_host_ip(dev, ip, mask, gateway, dns=""):

@@ -121,6 +121,24 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
         ref2name[ref] = name
 
         cfg = parse_dev_config(dev)
+        # POWER портов: имя -> true/false (имена реконструируем по раскладке)
+        from donor_registry import reconstruct, SWITCH_MODELS
+
+        modules = dev.findall(".//MODULE")
+        if modules:
+            layout = [[q.findtext("TYPE") or "" for q in m.findall(".//PORT")] for m in modules]
+            ports = [q for m in modules for q in m.findall(".//PORT")]
+        else:
+            ports = dev.findall(".//PORT")
+            layout = [[q.findtext("TYPE") or "" for q in ports]]
+        isr_m = model.upper().startswith("ISR") or model in ("4321", "4331")
+        start_m = 1 if model in SWITCH_MODELS else 0
+        power_by_port: dict[str, bool] = {}
+        for p_el, nm in zip(ports, reconstruct(layout, start=start_m, isr=isr_m)):
+            if nm.startswith("?unk:"):
+                continue
+            power_by_port[nm] = (p_el.findtext("POWER") or "true").lower() != "false"
+
         # IP хоста: PORT с непустым IP
         hip = hmask = hgw = None
         for port in dev.findall(".//PORT"):
@@ -147,7 +165,7 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
                 except (TypeError, ValueError):
                     pass
         devs[name] = {"model": model, "cfg": cfg, "hip": hip, "hmask": hmask,
-                      "hgw": hgw, "vlans_db": vlans_db,
+                      "hgw": hgw, "vlans_db": vlans_db, "power": power_by_port,
                       "kind": ("router" if is_router(model) else
                                "switch" if is_switch(model) else
                                "host" if is_host(model) else "other")}
@@ -165,6 +183,12 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
         a, b = ref2name[refs[0]], ref2name[refs[1]]
         adj.setdefault(a, {}).setdefault(ports[0], []).append((b, ports[1]))
         adj.setdefault(b, {}).setdefault(ports[1], []).append((a, ports[0]))
+        # физически выключенный порт с линком = мёртвый линк
+        for dn, dp in ((a, ports[0]), (b, ports[1])):
+            d = devs.get(dn)
+            if d and d["power"].get(dp) is False:
+                problems.append(f"[{dn}] порт {dp}: POWER=false (физически выключен), "
+                                f"но на нём линк → линк мёртв")
 
     # --- эффективный VLAN порта свитча ---
     def switch_port_vlan(dev_name: str, port: str, seen=None):
@@ -203,6 +227,11 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
             return (sub["dot1q"] or 1), sub
         return 1, st  # физический интерфейс с IP = native VLAN 1
 
+    def port_dead(dev_name: str, port: str) -> bool:
+        """Порт физически выключен (POWER=false)."""
+        d = devs.get(dev_name)
+        return bool(d) and d["power"].get(port) is False
+
     # --- BFS по L2: свитч флудит во ВСЕ свои порты, не только пару линка ---
     def l2_reachable(src_dev: str, src_port: str, vlan: int | str) -> set[str]:
         """Все устройства, достижимые на канальном уровне в данном VLAN."""
@@ -218,7 +247,7 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
             # свитч мостит на все остальные свои порты
             if dv_dev and dv_dev["kind"] == "switch":
                 for np2 in adj.get(dv, {}):
-                    if np2 == dp:
+                    if np2 == dp or port_dead(dv, np2):
                         continue
                     v = switch_port_vlan(dv, np2)
                     if v is None:
@@ -236,7 +265,7 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
             # обычный порт: идём к соседям по линку
             for (nd, np_) in adj.get(dv, {}).get(dp, []):
                 nd_dev = devs.get(nd)
-                if not nd_dev:
+                if not nd_dev or port_dead(nd, np_):
                     continue
                 if nd_dev["kind"] == "switch":
                     v = switch_port_vlan(nd, np_)
