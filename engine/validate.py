@@ -114,7 +114,8 @@ def valid_port(name: str, model: str, registry: dict, donor_ports: dict[str, set
 
 
 def check_config_interfaces(dev: str, model: str, lines: list[str], registry: dict,
-                            donor_ports: dict[str, set[str]] | None = None):
+                            donor_ports: dict[str, set[str]] | None = None,
+                            problems: list[dict] | None = None):
     known = set()
     entry = registry.get(model)
     if entry:
@@ -137,19 +138,24 @@ def check_config_interfaces(dev: str, model: str, lines: list[str], registry: di
         bases = {p.split("/")[0].split(" ")[0] for p in known} if known else set()
         if bases and structural_port_ok(ifname, bases):
             continue
-        warn(dev, f"конфиг ссылается на неизвестный интерфейс «{ifname}»")
+        if problems is not None:
+            problems.append({"severity": "warning", "device": dev,
+                             "message": f"конфиг ссылается на неизвестный интерфейс «{ifname}»"})
 
 
-def main(argv=None) -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("spec")
-    ap.add_argument("--registry", default=None)
-    ap.add_argument("--donor", action="append", default=[], help="донор .pkt/.xml (проверка template)")
-    ap.add_argument("--max-warnings", type=int, default=10)
-    args = ap.parse_args(argv)
+def validate_spec(spec: dict, registry: dict,
+                  donor_index: dict[str, str] | None = None,
+                  donor_ports: dict[str, set[str]] | None = None) -> list[dict]:
+    """Ядро валидации: возвращает список проблем {severity, device, message}."""
+    problems: list[dict] = []
+    donor_index = donor_index or {}
+    donor_ports = donor_ports or {}
 
-    spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
-    registry = load_registry(Path(args.registry) if args.registry else None)
+    def err(dev: str, msg: str):
+        problems.append({"severity": "error", "device": dev, "message": msg})
+
+    def warn(dev: str, msg: str):
+        problems.append({"severity": "warning", "device": dev, "message": msg})
 
     devices = spec.get("devices") or []
     links = spec.get("links") or []
@@ -176,10 +182,6 @@ def main(argv=None) -> int:
         if names.count(n) > 1:
             err(n, f"дублирующееся имя устройства «{n}»")
 
-    donor_index: dict[str, str] = {}
-    donor_ports: dict[str, set[str]] = {}
-    if args.donor:
-        donor_index, donor_ports = donor_device_index([Path(p) for p in args.donor])
     for d in devices:
         name = d.get("name") or "?"
         tpl = d.get("template")
@@ -235,7 +237,7 @@ def main(argv=None) -> int:
                 err(name, "config должен быть списком строк CLI")
             else:
                 mdl_real = donor_index.get(d.get("template") or "", d.get("model") or "")
-                check_config_interfaces(name, mdl_real, cfg, registry, donor_ports)
+                check_config_interfaces(name, mdl_real, cfg, registry, donor_ports, problems)
 
     # --- линки ---
     for l in links:
@@ -263,16 +265,35 @@ def main(argv=None) -> int:
             if registry and not valid_port(port, mdl_real, registry, donor_ports):
                 err(dev, f"порта «{port}» нет у модели «{mdl_real or mdl}»")
 
-    # --- отчёт ---
-    errors = [p for p in PROBLEMS if p["severity"] == "error"]
-    warnings = [p for p in PROBLEMS if p["severity"] == "warning"]
+    return problems
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("spec")
+    ap.add_argument("--registry", default=None)
+    ap.add_argument("--donor", action="append", default=[], help="донор .pkt/.xml (проверка template)")
+    ap.add_argument("--max-warnings", type=int, default=10)
+    args = ap.parse_args(argv)
+
+    spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
+    registry = load_registry(Path(args.registry) if args.registry else None)
+    donor_index: dict[str, str] = {}
+    donor_ports: dict[str, set[str]] = {}
+    if args.donor:
+        donor_index, donor_ports = donor_device_index([Path(p) for p in args.donor])
+
+    problems = validate_spec(spec, registry, donor_index, donor_ports)
+    errors = [p for p in problems if p["severity"] == "error"]
+    warnings = [p for p in problems if p["severity"] == "warning"]
     for p in errors:
         print(f"ERROR [{p['device']}] {p['message']}")
     for p in warnings[: args.max_warnings]:
         print(f"warn  [{p['device']}] {p['message']}")
     if len(warnings) > args.max_warnings:
         print(f"… и ещё {len(warnings) - args.max_warnings} предупреждений")
-    print(f"\nитог: устройств {len(devices)}, линков {len(links)}, "
+    print(f"\nитог: устройств {len(spec.get('devices') or [])}, "
+          f"линков {len(spec.get('links') or [])}, "
           f"ошибок {len(errors)}, предупреждений {len(warnings)}")
     return 1 if errors else 0
 

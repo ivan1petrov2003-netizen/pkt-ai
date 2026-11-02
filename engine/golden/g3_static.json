@@ -1,0 +1,32 @@
+{
+  "meta": {"name": "G3: Статическая маршрутизация, 2 роутера"},
+  "devices": [
+    {"name": "R1", "template": "Router0", "x": 300, "y": 200,
+     "config": ["hostname R1",
+                "interface GigabitEthernet0/0",
+                " ip address 10.0.0.1 255.255.255.252",
+                " no shutdown",
+                "interface GigabitEthernet0/1",
+                " ip address 10.1.1.1 255.255.255.0",
+                " no shutdown",
+                "ip route 10.2.2.0 255.255.255.0 10.0.0.2"]},
+    {"name": "R2", "template": "Router0", "x": 700, "y": 200,
+     "config": ["hostname R2",
+                "interface GigabitEthernet0/0",
+                " ip address 10.0.0.2 255.255.255.252",
+                " no shutdown",
+                "interface GigabitEthernet0/1",
+                " ip address 10.2.2.1 255.255.255.0",
+                " no shutdown",
+                "ip route 10.1.1.0 255.255.255.0 10.0.0.1"]},
+    {"name": "PC1", "template": "PC0", "x": 150, "y": 380,
+     "ip": "10.1.1.10", "mask": "255.255.255.0", "gateway": "10.1.1.1"},
+    {"name": "PC2", "template": "PC0", "x": 850, "y": 380,
+     "ip": "10.2.2.10", "mask": "255.255.255.0", "gateway": "10.2.2.1"}
+  ],
+  "links": [
+    {"from": "R1", "from_port": "GigabitEthernet0/0", "to": "R2", "to_port": "GigabitEthernet0/0", "cable": "eCrossOver"},
+    {"from": "R1", "from_port": "GigabitEthernet0/1", "to": "PC1", "to_port": "FastEthernet0"},
+    {"from": "R2", "from_port": "GigabitEthernet0/1", "to": "PC2", "to_port": "FastEthernet0"}
+  ]
+}

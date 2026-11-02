@@ -106,27 +106,25 @@ C:\Users\gaming\Desktop\pkt-ai\
 - [x] Формат IR определён пользователем (devices/template/model/x/y/config[]/vlans/ip/mask/gateway/dns/ssid + links/from_port/to_port/cable) — примеры: `engine/example_spec.json`, `lab_*.json`
 - [x] **Семантический валидатор** (`engine/validate.py`, встроен в pt_build, `--no-validate`): битые ссылки/шаблоны, несуществующие и повторно занятые порты, кривые IP/маски/шлюзы/дубли, VLAN, конфиг-интерфейсы; порты донор-инстанса = ground truth; негативный тест проходит (exit=1)
 - [x] **Реестр моделей** (`engine/donor_registry.py` + `registry.json`): 140 моделей из 286 файлов корпуса; правила именования портов подтверждены корпусом (0 расхождений); модульная нумерация роутеров (2811: Ethernet1/0), ISR 3-уровневая (Gi0/0/0), свитчи с 1, хосты Fa0, спец-модели по наблюдаемым
-- [ ] Golden-тесты: 5 лаб (LAN, VLAN+trunk, static, OSPF, NAT+DHCP) → сборка → открытие в PT (ручная приёмка; кандидат №1 — pr3_v2)
+- [x] **Golden-лабы собраны (5/5):** g1_simple_lan, g2_vlan_trunk, g3_static, g4_ospf (`engine/golden/` + `build_golden.py`, валидация 0 ошибок, roundtrip-контроль) + g5_pr3_x17. Ждёт ручной проверки в PT: `docs/ACCEPTANCE.md`
 - [ ] Автолэйаут получше (сейчас сетка 5 колонок; есть pt_relayout.py для зон)
 
 **Приёмка Ф2:** 5 золотых лаб собираются из JSON и открываются в PT с рабочими конфигами.
 
-### Фаза 3 — LLM-слой + REST API (≈2–3 дня, Python)
+### Фаза 3 — LLM-слой + REST API — ✅ ГОТОВО 2026-11-02 (E2E 12/12 без ключа)
 
-- [ ] `api/`: FastAPI, `POST /api/v1/labs` {task, images?, model?} → {pkt (binary), ir, validation}; API-key auth; OpenAPI
-- [ ] Провайдер-агностик (OpenAI-совместимый + Anthropic), structured output по IR-схеме
-- [ ] Системный промпт: роль сетевого инженера, реестр доноров/моделей (из engine), few-shot из `engine/lab_*.json`, правила IP-планирования; готовый промпт пользователя из README_RU.md — за основу
-- [ ] Vision: фото/скриншот → топология → IR
-- [ ] Repair-loop: ошибки валидатора → обратно в LLM (макс. 3 итерации) → честный отчёт
-- [ ] E2E: текст задания из методички → .pkt
+- [x] `service/app.py`: FastAPI, `POST /api/v1/labs` {task, images?, provider?, model?, inline_ir?} → {pkt_b64, ir, validation, log, file}; X-API-Key; OpenAPI /docs
+- [x] `service/llm.py`: провайдер-агностик (OpenAI-совместимый любой base_url + Anthropic, vision data-URL)
+- [x] `service/pipeline.py`: системный промпт (правила + инвентарь донора + порты), repair-loop ≤3, robust JSON-парсинг
+- [x] E2E без ключа: inline_ir → валидация → сборка → расшифровка-контроль; негативные тесты; 12/12 зелёные
+- [ ] Реальный LLM-прогон с ключом пользователя: текст задания → .pkt (≥ 4/5) — «Приёмка Ф3»
+- [ ] few-shot примеры IR в промпт (из golden/) — после первого реального прогона
 
-**Приёмка Ф3:** текстовое задание → валидный .pkt одним запросом (≥ 4/5 на тестовом наборе).
+### Фаза 4 — MCP + упаковка — ✅ ГОТОВО 2026-11-02
 
-### Фаза 4 — MCP + упаковка (≈1–2 дня, Python MCP SDK)
-
-- [ ] MCP-сервер: tools `build_pkt(ir)`, `validate_ir(ir)`, `models_list()`, `pkt_inspect(file)` (обёртки над engine)
-- [ ] README: подключение к Claude Desktop / любому MCP-клиенту; пример HTTP
-- [ ] Релиз v0.1.0
+- [x] `service/mcp_server.py`: tools `build_pkt(ir)`, `validate_ir(ir)`, `inventory()`, `pkt_inspect(file)` — все 4 протестированы
+- [x] `service/README.md`: запуск API, ключи env, подключение к Claude Desktop
+- [ ] Релиз v0.1.0: тег после приёмки золотых лаб пользователем
 
 **Приёмка Ф4:** нейросеть в стороннем клиенте собирает .pkt по заданию без участия человека.
 

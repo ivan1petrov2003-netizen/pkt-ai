@@ -4,6 +4,30 @@
 
 ---
 
+## Сессия 2026-11-02 (часть 4) — MVP v0.1.0 ГОТОВ: API + MCP + 5 золотых лаб
+
+**Сделано:**
+- **5 золотых лаб** собраны (`engine/golden/`, `build_golden.py` → `corpus/golden/`):
+  g1_simple_lan, g2_vlan_trunk (router-on-a-stick), g3_static, g4_ospf, g5_pr3_x17.
+  Валидация 0 ошибок, roundtrip-контроль. Ждёт ручной приёмки в PT (`docs/ACCEPTANCE.md`).
+- **Фаза 3 готова:** `service/` — FastAPI (`POST /api/v1/labs`, GET inventory, X-API-Key),
+  провайдеры OpenAI-совместимый + Anthropic (vision data-URL), repair-loop ≤3 итераций,
+  robust JSON-парсинг. **E2E без ключа 12/12 зелёные** (inline IR → .pkt → расшифровка-контроль).
+- **Фаза 4 готова:** MCP-сервер (`service/mcp_server.py`, FastMCP v1, `mcp>=1,<2`):
+  build_pkt / validate_ir / inventory / pkt_inspect — все 4 протестированы.
+- validate.py отрефакторен: core-функция `validate_spec()` переиспользуется сервисом.
+- Докуменatация: service/README.md (запуск, ключи, подключение Claude Desktop),
+  docs/ACCEPTANCE.md (чеклист приёмки).
+
+**Что осталось до «идеальной вершины»:**
+1. Пользователь: открыть 5 golden-лаб в PT 8.0 (docs/ACCEPTANCE.md, 5–10 мин) → закрыть Фазу 2.
+2. Пользователь: LLM API-ключ → реальный прогон «текст задания → .pkt» → закрыть Фазу 3.
+3. Тег v0.1.0 после приёмки.
+
+**Блокеры:** только действия пользователя (см. выше).
+
+---
+
 ## Сессия 2026-11-02 (часть 3) — РЕЕСТР МОДЕЛЕЙ + ВАЛИДАТОР IR готовы
 
 **Сделано:**

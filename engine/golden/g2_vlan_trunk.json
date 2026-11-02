@@ -1,0 +1,39 @@
+{
+  "meta": {"name": "G2: VLAN + trunk, router-on-a-stick"},
+  "devices": [
+    {"name": "R1", "template": "Router0", "x": 400, "y": 100,
+     "config": ["hostname R1",
+                "interface GigabitEthernet0/0",
+                " no shutdown",
+                "interface GigabitEthernet0/0.10",
+                " encapsulation dot1Q 10",
+                " ip address 192.168.10.1 255.255.255.0",
+                "interface GigabitEthernet0/0.20",
+                " encapsulation dot1Q 20",
+                " ip address 192.168.20.1 255.255.255.0"]},
+    {"name": "SW1", "template": "Switch0", "x": 400, "y": 250,
+     "vlans": [{"id": 10, "name": "IT"}, {"id": 20, "name": "HR"}],
+     "config": ["hostname SW1",
+                "vlan 10",
+                " name IT",
+                "vlan 20",
+                " name HR",
+                "interface GigabitEthernet0/1",
+                " switchport mode trunk",
+                "interface FastEthernet0/1",
+                " switchport mode access",
+                " switchport access vlan 10",
+                "interface FastEthernet0/2",
+                " switchport mode access",
+                " switchport access vlan 20"]},
+    {"name": "PC-A", "template": "PC0", "x": 250, "y": 380,
+     "ip": "192.168.10.10", "mask": "255.255.255.0", "gateway": "192.168.10.1"},
+    {"name": "PC-B", "template": "PC0", "x": 550, "y": 380,
+     "ip": "192.168.20.10", "mask": "255.255.255.0", "gateway": "192.168.20.1"}
+  ],
+  "links": [
+    {"from": "R1", "from_port": "GigabitEthernet0/0", "to": "SW1", "to_port": "GigabitEthernet0/1"},
+    {"from": "SW1", "from_port": "FastEthernet0/1", "to": "PC-A", "to_port": "FastEthernet0"},
+    {"from": "SW1", "from_port": "FastEthernet0/2", "to": "PC-B", "to_port": "FastEthernet0"}
+  ]
+}

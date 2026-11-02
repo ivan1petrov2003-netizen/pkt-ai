@@ -1,0 +1,20 @@
+{
+  "meta": {"name": "G1: Простая LAN (PC → свитч → роутер)"},
+  "devices": [
+    {"name": "R1", "template": "Router0", "x": 400, "y": 100,
+     "config": ["hostname R1",
+                "interface GigabitEthernet0/0",
+                " ip address 192.168.1.1 255.255.255.0",
+                " no shutdown"]},
+    {"name": "SW1", "template": "Switch0", "x": 400, "y": 250},
+    {"name": "PC1", "template": "PC0", "x": 250, "y": 380,
+     "ip": "192.168.1.10", "mask": "255.255.255.0", "gateway": "192.168.1.1"},
+    {"name": "PC2", "template": "PC0", "x": 550, "y": 380,
+     "ip": "192.168.1.11", "mask": "255.255.255.0", "gateway": "192.168.1.1"}
+  ],
+  "links": [
+    {"from": "R1", "from_port": "GigabitEthernet0/0", "to": "SW1", "to_port": "GigabitEthernet0/1"},
+    {"from": "SW1", "from_port": "FastEthernet0/1", "to": "PC1", "to_port": "FastEthernet0"},
+    {"from": "SW1", "from_port": "FastEthernet0/2", "to": "PC2", "to_port": "FastEthernet0"}
+  ]
+}
