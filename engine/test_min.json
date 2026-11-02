@@ -1,0 +1,25 @@
+{
+  "devices": [
+    {
+      "name": "SW1",
+      "template": "Switch0",
+      "x": 200,
+      "y": 200
+    },
+    {
+      "name": "PC1",
+      "template": "PC0",
+      "x": 400,
+      "y": 400
+    }
+  ],
+  "links": [
+    {
+      "from": "PC1",
+      "from_port": "FastEthernet0",
+      "to": "SW1",
+      "to_port": "FastEthernet0/1",
+      "cable": "eStraightThrough"
+    }
+  ]
+}

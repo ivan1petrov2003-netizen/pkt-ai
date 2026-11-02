@@ -1,0 +1,215 @@
+{
+  "devices": [
+    {
+      "name": "HQ",
+      "template": "Router0",
+      "x": 350,
+      "y": 150,
+      "config": [
+        "hostname HQ",
+        "end"
+      ]
+    },
+    {
+      "name": "ISP",
+      "template": "Router0",
+      "x": 650,
+      "y": 150,
+      "config": [
+        "hostname ISP",
+        "end"
+      ]
+    },
+    {
+      "name": "BR",
+      "template": "Router0",
+      "x": 950,
+      "y": 150,
+      "config": [
+        "hostname BR",
+        "end"
+      ]
+    },
+    {
+      "name": "SW1",
+      "template": "Switch1",
+      "x": 200,
+      "y": 400,
+      "config": [
+        "hostname SW1",
+        "end"
+      ]
+    },
+    {
+      "name": "SW2",
+      "template": "Switch1",
+      "x": 500,
+      "y": 400,
+      "config": [
+        "hostname SW2",
+        "end"
+      ]
+    },
+    {
+      "name": "SW3",
+      "template": "Switch1",
+      "x": 350,
+      "y": 600,
+      "config": [
+        "hostname SW3",
+        "end"
+      ]
+    },
+    {
+      "name": "BR-SW",
+      "template": "Switch1",
+      "x": 950,
+      "y": 400,
+      "config": [
+        "hostname BR-SW",
+        "end"
+      ]
+    },
+    {
+      "name": "PC1",
+      "template": "PC0",
+      "x": 150,
+      "y": 700,
+      "ip": "192.168.100.10",
+      "mask": "255.255.255.0",
+      "gateway": "192.168.100.254"
+    },
+    {
+      "name": "SRV01",
+      "template": "Server0",
+      "x": 550,
+      "y": 700,
+      "ip": "192.168.200.10",
+      "mask": "255.255.255.0",
+      "gateway": "192.168.200.254"
+    },
+    {
+      "name": "BR-CLI",
+      "template": "PC0",
+      "x": 950,
+      "y": 700,
+      "ip": "172.16.10.70",
+      "mask": "255.255.255.224",
+      "gateway": "172.16.10.65"
+    }
+  ],
+  "links": [
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/1",
+      "to": "SW2",
+      "to_port": "FastEthernet0/1",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/2",
+      "to": "SW2",
+      "to_port": "FastEthernet0/2",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/3",
+      "to": "SW2",
+      "to_port": "FastEthernet0/3",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/4",
+      "to": "SW3",
+      "to_port": "FastEthernet0/4",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/5",
+      "to": "SW3",
+      "to_port": "FastEthernet0/5",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/6",
+      "to": "SW3",
+      "to_port": "FastEthernet0/6",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/7",
+      "to": "SW1",
+      "to_port": "FastEthernet0/7",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/8",
+      "to": "SW1",
+      "to_port": "FastEthernet0/8",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/9",
+      "to": "SW1",
+      "to_port": "FastEthernet0/9",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/10",
+      "to": "PC1",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/10",
+      "to": "SRV01",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/21",
+      "to": "HQ",
+      "to_port": "GigabitEthernet0/0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "HQ",
+      "from_port": "GigabitEthernet0/1",
+      "to": "ISP",
+      "to_port": "GigabitEthernet0/1",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "ISP",
+      "from_port": "GigabitEthernet0/0",
+      "to": "BR",
+      "to_port": "GigabitEthernet0/0",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "BR",
+      "from_port": "GigabitEthernet0/1",
+      "to": "BR-SW",
+      "to_port": "GigabitEthernet0/1",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "BR-SW",
+      "from_port": "FastEthernet0/10",
+      "to": "BR-CLI",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    }
+  ]
+}

@@ -28,7 +28,7 @@
 | ADR-1 | LLM **не** генерирует XML напрямую. LLM генерирует **IR** (JSON): устройства, связи, CLI-конфиги | XML PT огромный, недокументированный, строгий к ссылочной целостности. JSON-вывод через structured output надёжен; XML собирает детерминированный код |
 | ADR-2 | Конфиги устройств = **CLI-текст** (startup-config), вставляемый в XML | Внутри .pkt конфиги уже хранятся как IOS-текст — LLM отлично их пишут, не нужно моделировать внутреннее состояние PT |
 | ADR-3 | XML собирается из **скелетных шаблонов**, извлечённых из расшифрованных эталонных .pkt (не с нуля) | Гарантия валидности: берём файл, который точно открывается, и учимся минимально его патчить |
-| ADR-4 | Стек: **Node.js + TypeScript** без рантайм-зависимостей в core/cli (node:test) | Node 24 у пользователя запускает TS нативно; криптокод переносится из дешифратора как есть |
+| ADR-4 | ~~Node.js+TS~~ → **ИЗМЕНЕНО 2026-11-02: движок = Python** (тулкит пользователя из `C:\Project\Cisco`: pt_tool/pt_build/pkt_graph), API/MCP/LLM тоже Python (FastAPI + MCP SDK). TS-ядро (`packages/core`) остаётся как независимая кросс-проверка крипты + легаси-инструмент | Python-builder уже написан и **проверен открытием в PT 8.0**; портирование в TS заняло бы 3–5 дней и рисковало сломать работающее |
 | ADR-5 | Валидация IR **до** сборки + repair-loop с LLM (макс. 3 итерации) | Дешёвле ловить ошибки в JSON, чем в бинарнике .pkt |
 | ADR-6 | Формат документируем эмпирически: **корпус эталонных файлов + попарный дифф** | Официальной документации нет; дифф «до/после добавления устройства» надёжно восстанавливает структуру |
 | ADR-7 | Криптоядро — замороженная зона: менять только с новыми векторными тестами | Ошибка в крипто = тихая порча всех файлов |
@@ -54,24 +54,21 @@
 
 ```
 C:\Users\gaming\Desktop\pkt-ai\
-  packages/
-    core/        # криптоядро pkt⇄xml: оба контейнера + автодетект (готово)
-    cli/         # pkt-tool: dec|enc|enc-legacy|roundtrip|info|header (готово)
-    ir/          # (Фаза 2) zod-схемы IR, семантический валидатор
-    builder/     # (Фаза 2) IR → XML → .pkt
-    llm/         # (Фаза 3) провайдеры, промпты, repair-loop
-    api/         # (Фаза 3) REST (Fastify)
-    mcp/         # (Фаза 4) MCP-сервер
+  engine/          # ДВИЖОК (Python, из C:\Project\Cisco, проверен в PT 8.0):
+                   #   pt_tool.py    — криптография (теперь + легаси-контейнер и автодетект)
+                   #   pt_build.py   — JSON → .pkt (клонирование из донора a.xml)
+                   #   pkt_graph.py  — XML → JSON топология
+                   #   pt_relayout.py, donor_list.py, fix_templates.py, build_pr3.py
+                   #   a.xml — донор PT 8.0 (2911, 2960, PC, Server, AP, Cloud…)
+  packages/        # (TS) core — криптоядро+CLI: кросс-проверка и легаси; node --test
   corpus/
-    samples/     # 7 эталонных файлов (2 семейства контейнеров)
-    reference/   # (Фаза 1) полный корпус из saves PT 8.0 (284 шт.)
-    roundtrip-test/
-  docs/
-    FORMAT.md    # реконструкция формата — ведётся
-  tools/
-    decrypt-probe.ts  # отладочный пробер формата
+    samples/       # эталоны: a.pkt (PT 8.0!), .pka×2 (PT 7.3), легаси .pkt×5
+    reference/     # (Фаза 1) полный корпус из saves PT 8.0 (284 шт.)
+  docs/FORMAT.md   # реконструкция формата — ведётся
+  tools/decrypt-probe.ts
   PLAN.md, PROGRESS.md, README.md
 ```
+Оригинал тулкита: `C:\Project\Cisco\` (пользовательская папка, не трогаем).
 
 ## 5. Фазы
 
@@ -84,7 +81,8 @@ C:\Users\gaming\Desktop\pkt-ai\
 - [x] **Открытие:** учебные saves PT 8.0 — легаси-контейнер (XOR+zlib, PT 5.2); реализованы ОБА контейнера + автодетект
 - [x] Реальные файлы: 284 легаси .pkt из saves + 2 современных .pka (PT 7.3) — roundtrip зелёный
 - [x] Тесты 6/6, git-коммиты
-- [ ] **Единственный остаток:** свежий .pkt, сохранённый самим PT 8.0 пользователя (нужно его действие) — подтвердить, что ключ 8.0 совпадает с 7.3
+- [x] **Подтверждено на подлинном PT 8.0:** `a.pkt` пользователя (8.0.0.0212) — TS roundtrip идентичен; его же тулкит собирал файлы, открывающиеся в PT 8.0. Фаза 0 закрыта полностью.
+- [x] **Найден готовый Python-тулкит пользователя** (`C:\Project\Cisco`) → принят как движок (ADR-4 изменён), скопирован в `engine/`, добавлена поддержка легаси-контейнера, CLI на автодетекте
 
 ### Фаза 1 — Корпус и реконструкция формата (≈2–4 дня)
 
@@ -102,39 +100,32 @@ C:\Users\gaming\Desktop\pkt-ai\
 
 **Приёмка Ф1:** по FORMAT.md удаётся вручную собрать пустую схему + 2 роутера + линк + конфиг (правкой XML) и файл открывается в PT.
 
-### Фаза 2 — IR + builder (≈3–5 дней)
+### Фаза 2 — IR + builder — ЯДРО УЖЕ ЕСТЬ (pt_build.py), осталось вокруг
 
-- [ ] `packages/ir`: схема IR
-      ```jsonc
-      {
-        "meta": {"name": "...", "ptVersion": "8.0"},
-        "devices": [{"id": "R1", "model": "2911", "modules": ["HWIC-2T"], "position": [x, y]}],
-        "links": [{"from": "R1", "port": "Gi0/0", "to": "SW1", "port": "Fa0/1", "cable": "copper-straight"}],
-        "configs": {"R1": "hostname R1\ninterface Gi0/0\n ..."}
-      }
-      ```
-- [ ] Семантический валидатор: ссылки существуют; порты не заняты дважды; порт принадлежит модели; IP-план без дублей в одном subnet; конфиг ссылается на существующие интерфейсы
-- [ ] `packages/builder`: загрузка скелета, вставка устройств (реестр моделей), сквозная нумерация ID, автолэйаут, линки, вставка CLI-конфигов, сборка .pkt
-- [ ] Golden-тесты: IR золотых лаб → XML → семантический дифф с эталоном
-- [ ] Ручная приёмка: 5 золотых лаб генерируются и открываются в PT
+- [x] Builder: JSON → .pkt через клонирование донора (`engine/pt_build.py`, проверен в PT 8.0)
+- [x] Формат IR определён пользователем (devices/template/model/x/y/config[]/vlans/ip/mask/gateway/dns/ssid + links/from_port/to_port/cable) — примеры: `engine/example_spec.json`, `lab_*.json`
+- [ ] Формализовать IR-схему (pydantic/jsonschema) + **семантический валидатор**: ссылки существуют; порт существует у модели и свободен; IP-план без дублей; конфиг ссылается на существующие интерфейсы
+- [ ] Реестр моделей: расширить за пределы донора a.xml (несколько доноров — `donor_list.py`, `pr3/`); порты/слоты/ограничения
+- [ ] Golden-тесты: 5 лаб (LAN, VLAN+trunk, static, OSPF, NAT+DHCP) → сборка → открытие в PT (ручная приёмка)
+- [ ] Автолэйаут получше (сейчас сетка 5 колонок; есть pt_relayout.py для зон)
 
-**Приёмка Ф2:** `pkt build lab.json` → .pkt, открывающийся в PT, для всех 5 золотых лаб.
+**Приёмка Ф2:** 5 золотых лаб собираются из JSON и открываются в PT с рабочими конфигами.
 
-### Фаза 3 — LLM-слой + REST API (≈2–3 дня)
+### Фаза 3 — LLM-слой + REST API (≈2–3 дня, Python)
 
-- [ ] `packages/llm`: провайдер-агностик (OpenAI-совместимый + Anthropic), structured output по IR-схеме
-- [ ] Системный промпт: роль сетевого инженера, реестр допустимых моделей, few-shot примеры IR, правила IP-планирования
-- [ ] Vision: фото/скриншот → извлечение топологии → IR
-- [ ] Repair-loop: ошибки валидатора → обратно в LLM (макс. 3 итерации) → честный отчёт пользователю
-- [ ] `packages/api` (Fastify): `POST /api/v1/labs` {task, images?, model?} → {pkt, ir, validation}; API-key auth; OpenAPI
-- [ ] E2E-тест: реальный текст задания из методички → .pkt
+- [ ] `api/`: FastAPI, `POST /api/v1/labs` {task, images?, model?} → {pkt (binary), ir, validation}; API-key auth; OpenAPI
+- [ ] Провайдер-агностик (OpenAI-совместимый + Anthropic), structured output по IR-схеме
+- [ ] Системный промпт: роль сетевого инженера, реестр доноров/моделей (из engine), few-shot из `engine/lab_*.json`, правила IP-планирования; готовый промпт пользователя из README_RU.md — за основу
+- [ ] Vision: фото/скриншот → топология → IR
+- [ ] Repair-loop: ошибки валидатора → обратно в LLM (макс. 3 итерации) → честный отчёт
+- [ ] E2E: текст задания из методички → .pkt
 
-**Приёмка Ф3:** текстовое задание → валидный .pkt одним запросом к API (≥ 4/5 на тестовом наборе).
+**Приёмка Ф3:** текстовое задание → валидный .pkt одним запросом (≥ 4/5 на тестовом наборе).
 
-### Фаза 4 — MCP + упаковка (≈1–2 дня)
+### Фаза 4 — MCP + упаковка (≈1–2 дня, Python MCP SDK)
 
-- [ ] `packages/mcp`: tools `build_pkt(ir)`, `validate_ir(ir)`, `models_list()`, `pkt_inspect(file)`
-- [ ] README: подключение к Claude Desktop / любому MCP-клиенту; пример HTTP-использования
+- [ ] MCP-сервер: tools `build_pkt(ir)`, `validate_ir(ir)`, `models_list()`, `pkt_inspect(file)` (обёртки над engine)
+- [ ] README: подключение к Claude Desktop / любому MCP-клиенту; пример HTTP
 - [ ] Релиз v0.1.0
 
 **Приёмка Ф4:** нейросеть в стороннем клиенте собирает .pkt по заданию без участия человека.
@@ -177,7 +168,8 @@ C:\Users\gaming\Desktop\pkt-ai\
 ```
 1. Прочитать: PLAN.md (этот файл), PROGRESS.md, docs/FORMAT.md
 2. Первый незакрытый чекбокс — задача на сессию
-3. Тесты: cd C:\Users\gaming\Desktop\pkt-ai && node --test packages/core/test/crypto.test.ts
-4. CLI: node packages/cli/src/pkt-tool.ts help
+3. Движок: cd C:\Users\gaming\Desktop\pkt-ai\engine && python pt_build.py test_min.json -o out.pkt --template a.xml
+4. TS-проверка: node packages/cli/src/pkt-tool.ts help ; тесты: node --test packages/core/test/crypto.test.ts
 5. Корпус-источник: C:\Program Files\Cisco Packet Tracer 8.0\saves\ (284 .pkt, легаси)
+6. Оригинал Python-тулкита: C:\Project\Cisco\ (не трогать, движок живёт в engine/)
 ```

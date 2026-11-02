@@ -1,0 +1,1804 @@
+{
+  "version": "8.0.0.0212",
+  "device_count": 11,
+  "link_count": 16,
+  "devices": [
+    {
+      "name": "PC1",
+      "model": "PC-PT",
+      "type": "Pc",
+      "ref": "save-ref-id:10967119746057546606",
+      "x": "119.5",
+      "y": "200",
+      "ip_config": [
+        {
+          "ip": "192.168.17.10",
+          "mask": "255.255.255.0",
+          "gateway": "192.168.17.254"
+        }
+      ],
+      "ssid": "Default",
+      "gateway": "192.168.17.254"
+    },
+    {
+      "name": "SW1",
+      "model": "2960-24TT",
+      "type": "Switch",
+      "ref": "save-ref-id:16407407992388371762",
+      "x": "339",
+      "y": "200",
+      "config": [
+        "!",
+        "version 12.2",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname SW1",
+        "enable password 7 0822404F1A0A",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "spanning-tree mode rapid-pvst",
+        "spanning-tree extend system-id",
+        "spanning-tree vlan 100 priority 0",
+        "spanning-tree vlan 200 priority 4096",
+        "spanning-tree vlan 300 priority 8192",
+        "interface Port-channel1",
+        " switchport mode trunk",
+        " switchport nonegotiate",
+        "interface Port-channel3",
+        "interface FastEthernet0/1",
+        " mac-address 0212.0000.2003",
+        "interface FastEthernet0/2",
+        " mac-address 0212.0000.2004",
+        "interface FastEthernet0/3",
+        " mac-address 0212.0000.2005",
+        " spanning-tree vlan 100,200,300 cost 8",
+        "interface FastEthernet0/4",
+        " mac-address 0212.0000.2006",
+        " shutdown",
+        "interface FastEthernet0/5",
+        " mac-address 0212.0000.2007",
+        "interface FastEthernet0/6",
+        " mac-address 0212.0000.2008",
+        "interface FastEthernet0/7",
+        " mac-address 0212.0000.2009",
+        "interface FastEthernet0/8",
+        " mac-address 0212.0000.200a",
+        "interface FastEthernet0/9",
+        " mac-address 0212.0000.200b",
+        "interface FastEthernet0/10",
+        " switchport access vlan 100",
+        " switchport mode access",
+        " mac-address 0212.0000.200c",
+        " spanning-tree portfast",
+        " spanning-tree guard root",
+        "interface FastEthernet0/11",
+        " mac-address 0212.0000.200d",
+        "interface FastEthernet0/12",
+        " mac-address 0212.0000.200e",
+        "interface FastEthernet0/13",
+        " mac-address 0212.0000.200f",
+        "interface FastEthernet0/14",
+        " mac-address 0212.0000.2010",
+        "interface FastEthernet0/15",
+        " mac-address 0212.0000.2011",
+        "interface FastEthernet0/16",
+        " mac-address 0212.0000.2012",
+        "interface FastEthernet0/17",
+        " mac-address 0212.0000.2013",
+        "interface FastEthernet0/18",
+        " mac-address 0212.0000.2014",
+        "interface FastEthernet0/19",
+        " mac-address 0212.0000.2015",
+        "interface FastEthernet0/20",
+        " mac-address 0212.0000.2016",
+        "interface FastEthernet0/21",
+        " mac-address 0212.0000.2017",
+        "interface FastEthernet0/22",
+        " mac-address 0212.0000.2018",
+        "interface FastEthernet0/23",
+        " mac-address 0212.0000.2019",
+        "interface FastEthernet0/24",
+        " mac-address 0212.0000.201a",
+        "interface GigabitEthernet0/1",
+        " mac-address 0212.0000.201b",
+        "interface GigabitEthernet0/2",
+        " mac-address 0212.0000.201c",
+        "interface Vlan1",
+        " no ip address",
+        "interface Vlan200",
+        " ip address 192.168.200.51 255.255.255.0",
+        "ip default-gateway 192.168.200.254",
+        "line con 0",
+        " logging synchronous",
+        "line vty 0 4",
+        " login",
+        " transport input ssh",
+        " privilege level 15",
+        "line vty 5 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Port-channel1",
+          "lines": [
+            "switchport mode trunk",
+            "switchport nonegotiate"
+          ]
+        },
+        {
+          "name": "Port-channel3",
+          "lines": []
+        },
+        {
+          "name": "FastEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.2003"
+          ]
+        },
+        {
+          "name": "FastEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.2004"
+          ]
+        },
+        {
+          "name": "FastEthernet0/3",
+          "lines": [
+            "mac-address 0212.0000.2005",
+            "spanning-tree vlan 100,200,300 cost 8"
+          ]
+        },
+        {
+          "name": "FastEthernet0/4",
+          "lines": [
+            "mac-address 0212.0000.2006",
+            "shutdown"
+          ]
+        },
+        {
+          "name": "FastEthernet0/5",
+          "lines": [
+            "mac-address 0212.0000.2007"
+          ]
+        },
+        {
+          "name": "FastEthernet0/6",
+          "lines": [
+            "mac-address 0212.0000.2008"
+          ]
+        },
+        {
+          "name": "FastEthernet0/7",
+          "lines": [
+            "mac-address 0212.0000.2009"
+          ]
+        },
+        {
+          "name": "FastEthernet0/8",
+          "lines": [
+            "mac-address 0212.0000.200a"
+          ]
+        },
+        {
+          "name": "FastEthernet0/9",
+          "lines": [
+            "mac-address 0212.0000.200b"
+          ]
+        },
+        {
+          "name": "FastEthernet0/10",
+          "lines": [
+            "switchport access vlan 100",
+            "switchport mode access",
+            "mac-address 0212.0000.200c",
+            "spanning-tree portfast",
+            "spanning-tree guard root"
+          ]
+        },
+        {
+          "name": "FastEthernet0/11",
+          "lines": [
+            "mac-address 0212.0000.200d"
+          ]
+        },
+        {
+          "name": "FastEthernet0/12",
+          "lines": [
+            "mac-address 0212.0000.200e"
+          ]
+        },
+        {
+          "name": "FastEthernet0/13",
+          "lines": [
+            "mac-address 0212.0000.200f"
+          ]
+        },
+        {
+          "name": "FastEthernet0/14",
+          "lines": [
+            "mac-address 0212.0000.2010"
+          ]
+        },
+        {
+          "name": "FastEthernet0/15",
+          "lines": [
+            "mac-address 0212.0000.2011"
+          ]
+        },
+        {
+          "name": "FastEthernet0/16",
+          "lines": [
+            "mac-address 0212.0000.2012"
+          ]
+        },
+        {
+          "name": "FastEthernet0/17",
+          "lines": [
+            "mac-address 0212.0000.2013"
+          ]
+        },
+        {
+          "name": "FastEthernet0/18",
+          "lines": [
+            "mac-address 0212.0000.2014"
+          ]
+        },
+        {
+          "name": "FastEthernet0/19",
+          "lines": [
+            "mac-address 0212.0000.2015"
+          ]
+        },
+        {
+          "name": "FastEthernet0/20",
+          "lines": [
+            "mac-address 0212.0000.2016"
+          ]
+        },
+        {
+          "name": "FastEthernet0/21",
+          "lines": [
+            "mac-address 0212.0000.2017"
+          ]
+        },
+        {
+          "name": "FastEthernet0/22",
+          "lines": [
+            "mac-address 0212.0000.2018"
+          ]
+        },
+        {
+          "name": "FastEthernet0/23",
+          "lines": [
+            "mac-address 0212.0000.2019"
+          ]
+        },
+        {
+          "name": "FastEthernet0/24",
+          "lines": [
+            "mac-address 0212.0000.201a"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.201b"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.201c"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "no ip address"
+          ]
+        },
+        {
+          "name": "Vlan200",
+          "lines": [
+            "ip address 192.168.200.51 255.255.255.0",
+            "ip default-gateway 192.168.200.254",
+            "line con 0",
+            "logging synchronous",
+            "line vty 0 4",
+            "login",
+            "transport input ssh",
+            "privilege level 15",
+            "line vty 5 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SRV01",
+      "model": "Server-PT",
+      "type": "Server",
+      "ref": "save-ref-id:15846425591246526823",
+      "x": "119.5",
+      "y": "520",
+      "ip_config": [
+        {
+          "ip": "192.168.200.200",
+          "mask": "255.255.255.0",
+          "gateway": "192.168.200.254"
+        }
+      ],
+      "ssid": "Default",
+      "gateway": "192.168.200.254"
+    },
+    {
+      "name": "SW2",
+      "model": "2960-24TT",
+      "type": "Switch",
+      "ref": "save-ref-id:8537139880140263585",
+      "x": "339",
+      "y": "520",
+      "config": [
+        "!",
+        "version 12.2",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname SW2",
+        "enable password 7 0822404F1A0A",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "spanning-tree mode rapid-pvst",
+        "spanning-tree extend system-id",
+        "spanning-tree vlan 200 priority 0",
+        "spanning-tree vlan 300 priority 4096",
+        "spanning-tree vlan 100 priority 8192",
+        "interface Port-channel1",
+        " switchport mode trunk",
+        " switchport nonegotiate",
+        "interface Port-channel2",
+        "interface FastEthernet0/1",
+        " mac-address 0212.0000.2039",
+        "interface FastEthernet0/2",
+        " mac-address 0212.0000.203a",
+        "interface FastEthernet0/3",
+        " mac-address 0212.0000.203b",
+        " spanning-tree vlan 100,200,300 cost 8",
+        "interface FastEthernet0/4",
+        " mac-address 0212.0000.203c",
+        "interface FastEthernet0/5",
+        " mac-address 0212.0000.203d",
+        "interface FastEthernet0/6",
+        " mac-address 0212.0000.203e",
+        "interface FastEthernet0/7",
+        " mac-address 0212.0000.203f",
+        " shutdown",
+        "interface FastEthernet0/8",
+        " mac-address 0212.0000.2040",
+        "interface FastEthernet0/9",
+        " mac-address 0212.0000.2041",
+        "interface FastEthernet0/10",
+        " switchport access vlan 200",
+        " switchport mode access",
+        " mac-address 0212.0000.2042",
+        "interface FastEthernet0/11",
+        " mac-address 0212.0000.2043",
+        "interface FastEthernet0/12",
+        " mac-address 0212.0000.2044",
+        "interface FastEthernet0/13",
+        " mac-address 0212.0000.2045",
+        "interface FastEthernet0/14",
+        " mac-address 0212.0000.2046",
+        "interface FastEthernet0/15",
+        " mac-address 0212.0000.2047",
+        "interface FastEthernet0/16",
+        " mac-address 0212.0000.2048",
+        "interface FastEthernet0/17",
+        " mac-address 0212.0000.2049",
+        "interface FastEthernet0/18",
+        " mac-address 0212.0000.204a",
+        "interface FastEthernet0/19",
+        " mac-address 0212.0000.204b",
+        "interface FastEthernet0/20",
+        " mac-address 0212.0000.204c",
+        "interface FastEthernet0/21",
+        " mac-address 0212.0000.204d",
+        "interface FastEthernet0/22",
+        " mac-address 0212.0000.204e",
+        "interface FastEthernet0/23",
+        " mac-address 0212.0000.204f",
+        "interface FastEthernet0/24",
+        " mac-address 0212.0000.2050",
+        "interface GigabitEthernet0/1",
+        " mac-address 0212.0000.2051",
+        "interface GigabitEthernet0/2",
+        " mac-address 0212.0000.2052",
+        "interface Vlan1",
+        " no ip address",
+        "interface Vlan200",
+        " ip address 192.168.200.52 255.255.255.0",
+        "ip default-gateway 192.168.200.254",
+        "line con 0",
+        " logging synchronous",
+        "line vty 0 4",
+        " login",
+        " transport input ssh",
+        " privilege level 15",
+        "line vty 5 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Port-channel1",
+          "lines": [
+            "switchport mode trunk",
+            "switchport nonegotiate"
+          ]
+        },
+        {
+          "name": "Port-channel2",
+          "lines": []
+        },
+        {
+          "name": "FastEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.2039"
+          ]
+        },
+        {
+          "name": "FastEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.203a"
+          ]
+        },
+        {
+          "name": "FastEthernet0/3",
+          "lines": [
+            "mac-address 0212.0000.203b",
+            "spanning-tree vlan 100,200,300 cost 8"
+          ]
+        },
+        {
+          "name": "FastEthernet0/4",
+          "lines": [
+            "mac-address 0212.0000.203c"
+          ]
+        },
+        {
+          "name": "FastEthernet0/5",
+          "lines": [
+            "mac-address 0212.0000.203d"
+          ]
+        },
+        {
+          "name": "FastEthernet0/6",
+          "lines": [
+            "mac-address 0212.0000.203e"
+          ]
+        },
+        {
+          "name": "FastEthernet0/7",
+          "lines": [
+            "mac-address 0212.0000.203f",
+            "shutdown"
+          ]
+        },
+        {
+          "name": "FastEthernet0/8",
+          "lines": [
+            "mac-address 0212.0000.2040"
+          ]
+        },
+        {
+          "name": "FastEthernet0/9",
+          "lines": [
+            "mac-address 0212.0000.2041"
+          ]
+        },
+        {
+          "name": "FastEthernet0/10",
+          "lines": [
+            "switchport access vlan 200",
+            "switchport mode access",
+            "mac-address 0212.0000.2042"
+          ]
+        },
+        {
+          "name": "FastEthernet0/11",
+          "lines": [
+            "mac-address 0212.0000.2043"
+          ]
+        },
+        {
+          "name": "FastEthernet0/12",
+          "lines": [
+            "mac-address 0212.0000.2044"
+          ]
+        },
+        {
+          "name": "FastEthernet0/13",
+          "lines": [
+            "mac-address 0212.0000.2045"
+          ]
+        },
+        {
+          "name": "FastEthernet0/14",
+          "lines": [
+            "mac-address 0212.0000.2046"
+          ]
+        },
+        {
+          "name": "FastEthernet0/15",
+          "lines": [
+            "mac-address 0212.0000.2047"
+          ]
+        },
+        {
+          "name": "FastEthernet0/16",
+          "lines": [
+            "mac-address 0212.0000.2048"
+          ]
+        },
+        {
+          "name": "FastEthernet0/17",
+          "lines": [
+            "mac-address 0212.0000.2049"
+          ]
+        },
+        {
+          "name": "FastEthernet0/18",
+          "lines": [
+            "mac-address 0212.0000.204a"
+          ]
+        },
+        {
+          "name": "FastEthernet0/19",
+          "lines": [
+            "mac-address 0212.0000.204b"
+          ]
+        },
+        {
+          "name": "FastEthernet0/20",
+          "lines": [
+            "mac-address 0212.0000.204c"
+          ]
+        },
+        {
+          "name": "FastEthernet0/21",
+          "lines": [
+            "mac-address 0212.0000.204d"
+          ]
+        },
+        {
+          "name": "FastEthernet0/22",
+          "lines": [
+            "mac-address 0212.0000.204e"
+          ]
+        },
+        {
+          "name": "FastEthernet0/23",
+          "lines": [
+            "mac-address 0212.0000.204f"
+          ]
+        },
+        {
+          "name": "FastEthernet0/24",
+          "lines": [
+            "mac-address 0212.0000.2050"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.2051"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.2052"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "no ip address"
+          ]
+        },
+        {
+          "name": "Vlan200",
+          "lines": [
+            "ip address 192.168.200.52 255.255.255.0",
+            "ip default-gateway 192.168.200.254",
+            "line con 0",
+            "logging synchronous",
+            "line vty 0 4",
+            "login",
+            "transport input ssh",
+            "privilege level 15",
+            "line vty 5 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SW3",
+      "model": "2960-24TT",
+      "type": "Switch",
+      "ref": "save-ref-id:6215411921609215311",
+      "x": "559",
+      "y": "360",
+      "config": [
+        "!",
+        "version 12.2",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname SW3",
+        "enable password 7 0822404F1A0A",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "spanning-tree mode rapid-pvst",
+        "spanning-tree extend system-id",
+        "spanning-tree vlan 300 priority 0",
+        "spanning-tree vlan 100 priority 4096",
+        "spanning-tree vlan 200 priority 8192",
+        "interface Port-channel2",
+        " switchport mode trunk",
+        " switchport nonegotiate",
+        "interface Port-channel3",
+        "interface FastEthernet0/1",
+        " mac-address 0212.0000.206d",
+        " shutdown",
+        "interface FastEthernet0/2",
+        " mac-address 0212.0000.206e",
+        "interface FastEthernet0/3",
+        " mac-address 0212.0000.206f",
+        "interface FastEthernet0/4",
+        " switchport mode dynamic desirable",
+        " mac-address 0212.0000.2070",
+        "interface FastEthernet0/5",
+        " mac-address 0212.0000.2071",
+        "interface FastEthernet0/6",
+        " mac-address 0212.0000.2072",
+        " spanning-tree vlan 100,200,300 cost 8",
+        "interface FastEthernet0/7",
+        " mac-address 0212.0000.2073",
+        "interface FastEthernet0/8",
+        " mac-address 0212.0000.2074",
+        "interface FastEthernet0/9",
+        " mac-address 0212.0000.2075",
+        "interface FastEthernet0/10",
+        " mac-address 0212.0000.2076",
+        "interface FastEthernet0/11",
+        " mac-address 0212.0000.2077",
+        "interface FastEthernet0/12",
+        " mac-address 0212.0000.2078",
+        "interface FastEthernet0/13",
+        " mac-address 0212.0000.2079",
+        "interface FastEthernet0/14",
+        " mac-address 0212.0000.207a",
+        "interface FastEthernet0/15",
+        " mac-address 0212.0000.207b",
+        "interface FastEthernet0/16",
+        " mac-address 0212.0000.207c",
+        "interface FastEthernet0/17",
+        " mac-address 0212.0000.207d",
+        "interface FastEthernet0/18",
+        " mac-address 0212.0000.207e",
+        "interface FastEthernet0/19",
+        " mac-address 0212.0000.207f",
+        "interface FastEthernet0/20",
+        " mac-address 0212.0000.2080",
+        "interface FastEthernet0/21",
+        " description Uplink to HQ G0/0/0",
+        " switchport trunk allowed vlan 100,200",
+        " mac-address 0212.0000.2081",
+        "interface FastEthernet0/22",
+        " mac-address 0212.0000.2082",
+        "interface FastEthernet0/23",
+        " mac-address 0212.0000.2083",
+        "interface FastEthernet0/24",
+        " mac-address 0212.0000.2084",
+        "interface GigabitEthernet0/1",
+        " mac-address 0212.0000.2085",
+        "interface GigabitEthernet0/2",
+        " mac-address 0212.0000.2086",
+        "interface Vlan1",
+        " no ip address",
+        "interface Vlan200",
+        " ip address 192.168.200.53 255.255.255.0",
+        "ip default-gateway 192.168.200.254",
+        "line con 0",
+        " logging synchronous",
+        "line vty 0 4",
+        " login",
+        " transport input ssh",
+        " privilege level 15",
+        "line vty 5 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Port-channel2",
+          "lines": [
+            "switchport mode trunk",
+            "switchport nonegotiate"
+          ]
+        },
+        {
+          "name": "Port-channel3",
+          "lines": []
+        },
+        {
+          "name": "FastEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.206d",
+            "shutdown"
+          ]
+        },
+        {
+          "name": "FastEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.206e"
+          ]
+        },
+        {
+          "name": "FastEthernet0/3",
+          "lines": [
+            "mac-address 0212.0000.206f"
+          ]
+        },
+        {
+          "name": "FastEthernet0/4",
+          "lines": [
+            "switchport mode dynamic desirable",
+            "mac-address 0212.0000.2070"
+          ]
+        },
+        {
+          "name": "FastEthernet0/5",
+          "lines": [
+            "mac-address 0212.0000.2071"
+          ]
+        },
+        {
+          "name": "FastEthernet0/6",
+          "lines": [
+            "mac-address 0212.0000.2072",
+            "spanning-tree vlan 100,200,300 cost 8"
+          ]
+        },
+        {
+          "name": "FastEthernet0/7",
+          "lines": [
+            "mac-address 0212.0000.2073"
+          ]
+        },
+        {
+          "name": "FastEthernet0/8",
+          "lines": [
+            "mac-address 0212.0000.2074"
+          ]
+        },
+        {
+          "name": "FastEthernet0/9",
+          "lines": [
+            "mac-address 0212.0000.2075"
+          ]
+        },
+        {
+          "name": "FastEthernet0/10",
+          "lines": [
+            "mac-address 0212.0000.2076"
+          ]
+        },
+        {
+          "name": "FastEthernet0/11",
+          "lines": [
+            "mac-address 0212.0000.2077"
+          ]
+        },
+        {
+          "name": "FastEthernet0/12",
+          "lines": [
+            "mac-address 0212.0000.2078"
+          ]
+        },
+        {
+          "name": "FastEthernet0/13",
+          "lines": [
+            "mac-address 0212.0000.2079"
+          ]
+        },
+        {
+          "name": "FastEthernet0/14",
+          "lines": [
+            "mac-address 0212.0000.207a"
+          ]
+        },
+        {
+          "name": "FastEthernet0/15",
+          "lines": [
+            "mac-address 0212.0000.207b"
+          ]
+        },
+        {
+          "name": "FastEthernet0/16",
+          "lines": [
+            "mac-address 0212.0000.207c"
+          ]
+        },
+        {
+          "name": "FastEthernet0/17",
+          "lines": [
+            "mac-address 0212.0000.207d"
+          ]
+        },
+        {
+          "name": "FastEthernet0/18",
+          "lines": [
+            "mac-address 0212.0000.207e"
+          ]
+        },
+        {
+          "name": "FastEthernet0/19",
+          "lines": [
+            "mac-address 0212.0000.207f"
+          ]
+        },
+        {
+          "name": "FastEthernet0/20",
+          "lines": [
+            "mac-address 0212.0000.2080"
+          ]
+        },
+        {
+          "name": "FastEthernet0/21",
+          "lines": [
+            "description Uplink to HQ G0/0/0",
+            "switchport trunk allowed vlan 100,200",
+            "mac-address 0212.0000.2081"
+          ]
+        },
+        {
+          "name": "FastEthernet0/22",
+          "lines": [
+            "mac-address 0212.0000.2082"
+          ]
+        },
+        {
+          "name": "FastEthernet0/23",
+          "lines": [
+            "mac-address 0212.0000.2083"
+          ]
+        },
+        {
+          "name": "FastEthernet0/24",
+          "lines": [
+            "mac-address 0212.0000.2084"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.2085"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.2086"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "no ip address"
+          ]
+        },
+        {
+          "name": "Vlan200",
+          "lines": [
+            "ip address 192.168.200.53 255.255.255.0",
+            "ip default-gateway 192.168.200.254",
+            "line con 0",
+            "logging synchronous",
+            "line vty 0 4",
+            "login",
+            "transport input ssh",
+            "privilege level 15",
+            "line vty 5 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HQ",
+      "model": "ISR4331",
+      "type": "Router",
+      "ref": "save-ref-id:11822878338008982817",
+      "x": "799",
+      "y": "240",
+      "ip_config": [
+        {
+          "ip": "192.168.1.1",
+          "mask": "255.255.255.0",
+          "gateway": ""
+        },
+        {
+          "ip": "20.17.5.2",
+          "mask": "255.255.255.248",
+          "gateway": ""
+        }
+      ],
+      "config": [
+        "!",
+        "version 15.4",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname HQ",
+        "enable password 7 0822404F1A0A",
+        "aaa new-model",
+        "aaa authentication login console local",
+        "aaa authentication login default local",
+        "clock timezone MSK 3",
+        "ip cef",
+        "ipv6 unicast-routing",
+        "no ipv6 cef",
+        "username admin privilege 15 secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "spanning-tree mode pvst",
+        "interface Loopback100",
+        " ip address 11.11.11.11 255.255.255.255",
+        " ipv6 address DEAD:BEEF::1/128",
+        " ipv6 enable",
+        "interface GigabitEthernet0/0/0",
+        " mac-address 0212.0000.20a1",
+        " ip address 192.168.1.1 255.255.255.0",
+        " duplex auto",
+        " speed auto",
+        "interface GigabitEthernet0/0/0.100",
+        " encapsulation dot1Q 100",
+        " ip address 192.168.17.254 255.255.255.0",
+        " ipv6 address A1F:EA75:CA75::254/64",
+        " ipv6 nd other-config-flag",
+        " ipv6 nd managed-config-flag",
+        "interface GigabitEthernet0/0/0.200",
+        " encapsulation dot1Q 200",
+        " ip address 192.168.200.254 255.255.255.0",
+        "interface GigabitEthernet0/0/1",
+        " description WAN to ISP",
+        " mac-address 0212.0000.20a2",
+        " ip address 20.17.5.2 255.255.255.248",
+        "interface GigabitEthernet0/0/2",
+        " mac-address 0212.0000.20a3",
+        " no ip address",
+        "interface Vlan1",
+        "router bgp 65001",
+        " bgp log-neighbor-changes",
+        " no synchronization",
+        " neighbor 20.17.5.1 remote-as 65000",
+        " network 11.11.11.11 mask 255.255.255.255",
+        " network 192.168.17.0",
+        " network 192.168.200.0",
+        "ip classless",
+        "ip route 0.0.0.0 0.0.0.0 20.17.5.1",
+        "ip flow-export version 9",
+        "line con 0",
+        " logging synchronous",
+        " login authentication console",
+        "line aux 0",
+        "line vty 0 4",
+        " login authentication default",
+        " transport input ssh",
+        " privilege level 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Loopback100",
+          "lines": [
+            "ip address 11.11.11.11 255.255.255.255",
+            "ipv6 address DEAD:BEEF::1/128",
+            "ipv6 enable"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/0",
+          "lines": [
+            "mac-address 0212.0000.20a1",
+            "ip address 192.168.1.1 255.255.255.0",
+            "duplex auto",
+            "speed auto"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/0.100",
+          "lines": [
+            "encapsulation dot1Q 100",
+            "ip address 192.168.17.254 255.255.255.0",
+            "ipv6 address A1F:EA75:CA75::254/64",
+            "ipv6 nd other-config-flag",
+            "ipv6 nd managed-config-flag"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/0.200",
+          "lines": [
+            "encapsulation dot1Q 200",
+            "ip address 192.168.200.254 255.255.255.0"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/1",
+          "lines": [
+            "description WAN to ISP",
+            "mac-address 0212.0000.20a2",
+            "ip address 20.17.5.2 255.255.255.248"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/2",
+          "lines": [
+            "mac-address 0212.0000.20a3",
+            "no ip address"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "router bgp 65001",
+            "bgp log-neighbor-changes",
+            "no synchronization",
+            "neighbor 20.17.5.1 remote-as 65000",
+            "network 11.11.11.11 mask 255.255.255.255",
+            "network 192.168.17.0",
+            "network 192.168.200.0",
+            "ip classless",
+            "ip route 0.0.0.0 0.0.0.0 20.17.5.1",
+            "ip flow-export version 9",
+            "line con 0",
+            "logging synchronous",
+            "login authentication console",
+            "line aux 0",
+            "line vty 0 4",
+            "login authentication default",
+            "transport input ssh",
+            "privilege level 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ISP",
+      "model": "ISR4331",
+      "type": "Router",
+      "ref": "save-ref-id:12928360193842109462",
+      "x": "1029",
+      "y": "360",
+      "ip_config": [
+        {
+          "ip": "20.17.5.13",
+          "mask": "255.255.255.252",
+          "gateway": ""
+        },
+        {
+          "ip": "20.17.5.1",
+          "mask": "255.255.255.248",
+          "gateway": ""
+        }
+      ],
+      "config": [
+        "!",
+        "version 15.4",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname ISP",
+        "enable password 7 0822404F1A0A",
+        "aaa new-model",
+        "aaa authentication login console local",
+        "aaa authentication login default local",
+        "ip cef",
+        "no ipv6 cef",
+        "username admin privilege 15 secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "spanning-tree mode pvst",
+        "interface Loopback100",
+        " ip address 8.8.8.8 255.255.255.255",
+        "interface Loopback101",
+        " ip address 209.136.0.1 255.255.0.0",
+        "interface Loopback102",
+        " ip address 138.76.0.1 255.255.0.0",
+        "interface GigabitEthernet0/0/0",
+        " description WAN to BR",
+        " mac-address 0212.0000.20a7",
+        " ip address 20.17.5.13 255.255.255.252",
+        " duplex auto",
+        " speed auto",
+        "interface GigabitEthernet0/0/1",
+        " description WAN to HQ",
+        " mac-address 0212.0000.20a8",
+        " ip address 20.17.5.1 255.255.255.248",
+        "interface GigabitEthernet0/0/2",
+        " mac-address 0212.0000.20a9",
+        " no ip address",
+        "interface Vlan1",
+        "router eigrp 2017",
+        " network 8.8.8.8 0.0.0.0",
+        " network 20.17.5.0 0.0.0.7",
+        " network 20.17.5.12 0.0.0.3",
+        "router bgp 65000",
+        " bgp log-neighbor-changes",
+        " no synchronization",
+        " neighbor 20.17.5.2 remote-as 65001",
+        " neighbor 20.17.5.14 remote-as 65002",
+        " network 209.136.0.0 mask 255.255.0.0",
+        " network 138.76.0.0",
+        "ip classless",
+        "ip flow-export version 9",
+        "line con 0",
+        " logging synchronous",
+        " login authentication console",
+        "line aux 0",
+        "line vty 0 4",
+        " login authentication default",
+        " transport input ssh",
+        " privilege level 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Loopback100",
+          "lines": [
+            "ip address 8.8.8.8 255.255.255.255"
+          ]
+        },
+        {
+          "name": "Loopback101",
+          "lines": [
+            "ip address 209.136.0.1 255.255.0.0"
+          ]
+        },
+        {
+          "name": "Loopback102",
+          "lines": [
+            "ip address 138.76.0.1 255.255.0.0"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/0",
+          "lines": [
+            "description WAN to BR",
+            "mac-address 0212.0000.20a7",
+            "ip address 20.17.5.13 255.255.255.252",
+            "duplex auto",
+            "speed auto"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/1",
+          "lines": [
+            "description WAN to HQ",
+            "mac-address 0212.0000.20a8",
+            "ip address 20.17.5.1 255.255.255.248"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/2",
+          "lines": [
+            "mac-address 0212.0000.20a9",
+            "no ip address"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "router eigrp 2017",
+            "network 8.8.8.8 0.0.0.0",
+            "network 20.17.5.0 0.0.0.7",
+            "network 20.17.5.12 0.0.0.3",
+            "router bgp 65000",
+            "bgp log-neighbor-changes",
+            "no synchronization",
+            "neighbor 20.17.5.2 remote-as 65001",
+            "neighbor 20.17.5.14 remote-as 65002",
+            "network 209.136.0.0 mask 255.255.0.0",
+            "network 138.76.0.0",
+            "ip classless",
+            "ip flow-export version 9",
+            "line con 0",
+            "logging synchronous",
+            "login authentication console",
+            "line aux 0",
+            "line vty 0 4",
+            "login authentication default",
+            "transport input ssh",
+            "privilege level 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BR",
+      "model": "ISR4331",
+      "type": "Router",
+      "ref": "save-ref-id:13458332008038627092",
+      "x": "879",
+      "y": "560",
+      "ip_config": [
+        {
+          "ip": "20.17.5.14",
+          "mask": "255.255.255.252",
+          "gateway": ""
+        }
+      ],
+      "config": [
+        "!",
+        "version 15.4",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname BR",
+        "enable password 7 0822404F1A0A",
+        "ip dhcp pool VLAN10",
+        " network 172.16.10.64 255.255.255.224",
+        " default-router 172.16.10.65",
+        " dns-server 8.8.8.8",
+        "aaa new-model",
+        "aaa authentication login console local",
+        "aaa authentication login default local",
+        "ip cef",
+        "ipv6 unicast-routing",
+        "no ipv6 cef",
+        "username admin privilege 15 secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "spanning-tree mode pvst",
+        "interface Loopback3",
+        " ip address 3.3.3.3 255.255.255.255",
+        " ipv6 address DEAD:BEEF:3::1/128",
+        " ipv6 enable",
+        "interface GigabitEthernet0/0/0",
+        " description WAN to ISP",
+        " mac-address 0212.0000.20ad",
+        " ip address 20.17.5.14 255.255.255.252",
+        " duplex auto",
+        " speed auto",
+        "interface GigabitEthernet0/0/1",
+        " mac-address 0212.0000.20ae",
+        " no ip address",
+        "interface GigabitEthernet0/0/1.10",
+        " encapsulation dot1Q 10",
+        " ip address 172.16.10.65 255.255.255.224",
+        "interface GigabitEthernet0/0/2",
+        " mac-address 0212.0000.20af",
+        "interface Vlan1",
+        "router bgp 65002",
+        " bgp log-neighbor-changes",
+        " no synchronization",
+        " neighbor 20.17.5.13 remote-as 65000",
+        " network 3.3.3.3 mask 255.255.255.255",
+        " network 172.16.10.64 mask 255.255.255.224",
+        "ip classless",
+        "ip route 0.0.0.0 0.0.0.0 20.17.5.13",
+        "ip flow-export version 9",
+        "line con 0",
+        " logging synchronous",
+        " login authentication console",
+        " privilege level 15",
+        "line aux 0",
+        "line vty 0 4",
+        " login authentication default",
+        " transport input ssh",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "Loopback3",
+          "lines": [
+            "ip address 3.3.3.3 255.255.255.255",
+            "ipv6 address DEAD:BEEF:3::1/128",
+            "ipv6 enable"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/0",
+          "lines": [
+            "description WAN to ISP",
+            "mac-address 0212.0000.20ad",
+            "ip address 20.17.5.14 255.255.255.252",
+            "duplex auto",
+            "speed auto"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/1",
+          "lines": [
+            "mac-address 0212.0000.20ae",
+            "no ip address"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/1.10",
+          "lines": [
+            "encapsulation dot1Q 10",
+            "ip address 172.16.10.65 255.255.255.224"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/0/2",
+          "lines": [
+            "mac-address 0212.0000.20af"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "router bgp 65002",
+            "bgp log-neighbor-changes",
+            "no synchronization",
+            "neighbor 20.17.5.13 remote-as 65000",
+            "network 3.3.3.3 mask 255.255.255.255",
+            "network 172.16.10.64 mask 255.255.255.224",
+            "ip classless",
+            "ip route 0.0.0.0 0.0.0.0 20.17.5.13",
+            "ip flow-export version 9",
+            "line con 0",
+            "logging synchronous",
+            "login authentication console",
+            "privilege level 15",
+            "line aux 0",
+            "line vty 0 4",
+            "login authentication default",
+            "transport input ssh",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BR-SW",
+      "model": "2960-24TT",
+      "type": "Switch",
+      "ref": "save-ref-id:5576289982960855459",
+      "x": "759",
+      "y": "700",
+      "config": [
+        "!",
+        "version 12.2",
+        "no service timestamps log datetime msec",
+        "no service timestamps debug datetime msec",
+        "service password-encryption",
+        "hostname BR-SW",
+        "enable password 7 0822404F1A0A",
+        "ip ssh version 2",
+        "no ip domain-lookup",
+        "ip domain-name kkep.local",
+        "username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0",
+        "spanning-tree mode rapid-pvst",
+        "spanning-tree extend system-id",
+        "interface FastEthernet0/1",
+        " mac-address 0212.0000.20b3",
+        " shutdown",
+        "interface FastEthernet0/2",
+        " mac-address 0212.0000.20b4",
+        "interface FastEthernet0/3",
+        " mac-address 0212.0000.20b5",
+        "interface FastEthernet0/4",
+        " mac-address 0212.0000.20b6",
+        "interface FastEthernet0/5",
+        " mac-address 0212.0000.20b7",
+        "interface FastEthernet0/6",
+        " mac-address 0212.0000.20b8",
+        "interface FastEthernet0/7",
+        " mac-address 0212.0000.20b9",
+        "interface FastEthernet0/8",
+        " mac-address 0212.0000.20ba",
+        "interface FastEthernet0/9",
+        " mac-address 0212.0000.20bb",
+        "interface FastEthernet0/10",
+        " switchport access vlan 10",
+        " switchport mode access",
+        " mac-address 0212.0000.20bc",
+        " spanning-tree portfast",
+        "interface FastEthernet0/11",
+        " mac-address 0212.0000.20bd",
+        "interface FastEthernet0/12",
+        " mac-address 0212.0000.20be",
+        "interface FastEthernet0/13",
+        " mac-address 0212.0000.20bf",
+        "interface FastEthernet0/14",
+        " mac-address 0212.0000.20c0",
+        "interface FastEthernet0/15",
+        " mac-address 0212.0000.20c1",
+        "interface FastEthernet0/16",
+        " mac-address 0212.0000.20c2",
+        "interface FastEthernet0/17",
+        " mac-address 0212.0000.20c3",
+        "interface FastEthernet0/18",
+        " mac-address 0212.0000.20c4",
+        "interface FastEthernet0/19",
+        " mac-address 0212.0000.20c5",
+        "interface FastEthernet0/20",
+        " mac-address 0212.0000.20c6",
+        "interface FastEthernet0/21",
+        " mac-address 0212.0000.20c7",
+        "interface FastEthernet0/22",
+        " mac-address 0212.0000.20c8",
+        "interface FastEthernet0/23",
+        " mac-address 0212.0000.20c9",
+        "interface FastEthernet0/24",
+        " mac-address 0212.0000.20ca",
+        "interface GigabitEthernet0/1",
+        " description Uplink to BR G0/0/1",
+        " switchport trunk allowed vlan 10",
+        " switchport mode trunk",
+        " mac-address 0212.0000.20cb",
+        "interface GigabitEthernet0/2",
+        " mac-address 0212.0000.20cc",
+        "interface Vlan1",
+        " no ip address",
+        "line con 0",
+        " logging synchronous",
+        "line vty 0 4",
+        " login",
+        " transport input ssh",
+        " privilege level 15",
+        "line vty 5 15",
+        "end"
+      ],
+      "interfaces": [
+        {
+          "name": "FastEthernet0/1",
+          "lines": [
+            "mac-address 0212.0000.20b3",
+            "shutdown"
+          ]
+        },
+        {
+          "name": "FastEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.20b4"
+          ]
+        },
+        {
+          "name": "FastEthernet0/3",
+          "lines": [
+            "mac-address 0212.0000.20b5"
+          ]
+        },
+        {
+          "name": "FastEthernet0/4",
+          "lines": [
+            "mac-address 0212.0000.20b6"
+          ]
+        },
+        {
+          "name": "FastEthernet0/5",
+          "lines": [
+            "mac-address 0212.0000.20b7"
+          ]
+        },
+        {
+          "name": "FastEthernet0/6",
+          "lines": [
+            "mac-address 0212.0000.20b8"
+          ]
+        },
+        {
+          "name": "FastEthernet0/7",
+          "lines": [
+            "mac-address 0212.0000.20b9"
+          ]
+        },
+        {
+          "name": "FastEthernet0/8",
+          "lines": [
+            "mac-address 0212.0000.20ba"
+          ]
+        },
+        {
+          "name": "FastEthernet0/9",
+          "lines": [
+            "mac-address 0212.0000.20bb"
+          ]
+        },
+        {
+          "name": "FastEthernet0/10",
+          "lines": [
+            "switchport access vlan 10",
+            "switchport mode access",
+            "mac-address 0212.0000.20bc",
+            "spanning-tree portfast"
+          ]
+        },
+        {
+          "name": "FastEthernet0/11",
+          "lines": [
+            "mac-address 0212.0000.20bd"
+          ]
+        },
+        {
+          "name": "FastEthernet0/12",
+          "lines": [
+            "mac-address 0212.0000.20be"
+          ]
+        },
+        {
+          "name": "FastEthernet0/13",
+          "lines": [
+            "mac-address 0212.0000.20bf"
+          ]
+        },
+        {
+          "name": "FastEthernet0/14",
+          "lines": [
+            "mac-address 0212.0000.20c0"
+          ]
+        },
+        {
+          "name": "FastEthernet0/15",
+          "lines": [
+            "mac-address 0212.0000.20c1"
+          ]
+        },
+        {
+          "name": "FastEthernet0/16",
+          "lines": [
+            "mac-address 0212.0000.20c2"
+          ]
+        },
+        {
+          "name": "FastEthernet0/17",
+          "lines": [
+            "mac-address 0212.0000.20c3"
+          ]
+        },
+        {
+          "name": "FastEthernet0/18",
+          "lines": [
+            "mac-address 0212.0000.20c4"
+          ]
+        },
+        {
+          "name": "FastEthernet0/19",
+          "lines": [
+            "mac-address 0212.0000.20c5"
+          ]
+        },
+        {
+          "name": "FastEthernet0/20",
+          "lines": [
+            "mac-address 0212.0000.20c6"
+          ]
+        },
+        {
+          "name": "FastEthernet0/21",
+          "lines": [
+            "mac-address 0212.0000.20c7"
+          ]
+        },
+        {
+          "name": "FastEthernet0/22",
+          "lines": [
+            "mac-address 0212.0000.20c8"
+          ]
+        },
+        {
+          "name": "FastEthernet0/23",
+          "lines": [
+            "mac-address 0212.0000.20c9"
+          ]
+        },
+        {
+          "name": "FastEthernet0/24",
+          "lines": [
+            "mac-address 0212.0000.20ca"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "lines": [
+            "description Uplink to BR G0/0/1",
+            "switchport trunk allowed vlan 10",
+            "switchport mode trunk",
+            "mac-address 0212.0000.20cb"
+          ]
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "lines": [
+            "mac-address 0212.0000.20cc"
+          ]
+        },
+        {
+          "name": "Vlan1",
+          "lines": [
+            "no ip address",
+            "line con 0",
+            "logging synchronous",
+            "line vty 0 4",
+            "login",
+            "transport input ssh",
+            "privilege level 15",
+            "line vty 5 15",
+            "end"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BR-CLI",
+      "model": "Laptop-PT",
+      "type": "Laptop",
+      "ref": "save-ref-id:16346364817391138954",
+      "x": "979.5",
+      "y": "700",
+      "ip_config": [
+        {
+          "ip": "169.254.32.231",
+          "mask": "255.255.0.0",
+          "gateway": ""
+        }
+      ],
+      "ssid": "Default"
+    },
+    {
+      "name": "Power Distribution Device0",
+      "model": "Power Distribution Device",
+      "type": "Power Distribution Device",
+      "ref": "save-ref-id:12085056356010385968",
+      "x": "3899",
+      "y": "3900"
+    }
+  ],
+  "links": [
+    {
+      "from": "PC1",
+      "from_port": "FastEthernet0",
+      "to": "SW1",
+      "to_port": "FastEthernet0/10",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SRV01",
+      "from_port": "FastEthernet0",
+      "to": "SW2",
+      "to_port": "FastEthernet0/10",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/1",
+      "to": "SW2",
+      "to_port": "FastEthernet0/1",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/2",
+      "to": "SW2",
+      "to_port": "FastEthernet0/2",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/3",
+      "to": "SW2",
+      "to_port": "FastEthernet0/3",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/7",
+      "to": "SW3",
+      "to_port": "FastEthernet0/7",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/8",
+      "to": "SW3",
+      "to_port": "FastEthernet0/8",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/9",
+      "to": "SW3",
+      "to_port": "FastEthernet0/9",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/4",
+      "to": "SW3",
+      "to_port": "FastEthernet0/4",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/5",
+      "to": "SW3",
+      "to_port": "FastEthernet0/5",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/6",
+      "to": "SW3",
+      "to_port": "FastEthernet0/6",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/21",
+      "to": "HQ",
+      "to_port": "GigabitEthernet0/0/0",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "HQ",
+      "from_port": "GigabitEthernet0/0/1",
+      "to": "ISP",
+      "to_port": "GigabitEthernet0/0/1",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "ISP",
+      "from_port": "GigabitEthernet0/0/0",
+      "to": "BR",
+      "to_port": "GigabitEthernet0/0/0",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "BR",
+      "from_port": "GigabitEthernet0/0/1",
+      "to": "BR-SW",
+      "to_port": "GigabitEthernet0/1",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "BR-SW",
+      "from_port": "FastEthernet0/10",
+      "to": "BR-CLI",
+      "to_port": "FastEthernet0",
+      "link_type": "eCopper",
+      "cable": "eStraightThrough"
+    }
+  ]
+}

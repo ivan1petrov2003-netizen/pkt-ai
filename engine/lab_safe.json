@@ -1,0 +1,447 @@
+{
+  "devices": [
+    {
+      "name": "HQ",
+      "template": "Router0",
+      "x": 350,
+      "y": 150,
+      "config": [
+        "hostname HQ",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "interface GigabitEthernet0/0/0",
+        " no shutdown",
+        "exit",
+        "interface GigabitEthernet0/0/0.100",
+        " encapsulation dot1Q 100",
+        " ip address 192.168.100.254 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "interface GigabitEthernet0/0/0.200",
+        " encapsulation dot1Q 200",
+        " ip address 192.168.200.254 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "ISP",
+      "template": "Router0",
+      "x": 650,
+      "y": 150,
+      "config": [
+        "hostname ISP",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "interface loopback 100",
+        " ip address 8.8.8.8 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "interface loopback 101",
+        " ip address 209.136.0.1 255.255.0.0",
+        " no shutdown",
+        "exit",
+        "interface loopback 102",
+        " ip address 138.76.0.1 255.255.0.0",
+        " no shutdown",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "BR",
+      "template": "Router0",
+      "x": 950,
+      "y": 150,
+      "config": [
+        "hostname BR",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "interface GigabitEthernet0/0/1",
+        " no shutdown",
+        "exit",
+        "interface GigabitEthernet0/0/1.10",
+        " encapsulation dot1Q 10",
+        " ip address 172.16.10.65 255.255.255.224",
+        " no shutdown",
+        "exit",
+        "interface loopback 3",
+        " ip address 3.3.3.3 255.255.255.255",
+        " no shutdown",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "SW1",
+      "template": "Switch0",
+      "x": 200,
+      "y": 400,
+      "vlans": [
+        {
+          "id": 100,
+          "name": "LAN"
+        },
+        {
+          "id": 200,
+          "name": "MGMT"
+        },
+        {
+          "id": 300,
+          "name": "EDGE"
+        }
+      ],
+      "config": [
+        "hostname SW1",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "ip default-gateway 192.168.200.254",
+        "vlan 100",
+        " name LAN",
+        "exit",
+        "vlan 200",
+        " name MGMT",
+        "exit",
+        "vlan 300",
+        " name EDGE",
+        "exit",
+        "interface vlan 200",
+        " ip address 192.168.200.51 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "interface range FastEthernet0/1-3",
+        " switchport mode trunk",
+        " switchport nonegotiate",
+        "exit",
+        "interface range FastEthernet0/1-2",
+        " channel-group 1 mode auto",
+        "exit",
+        "interface range FastEthernet0/7-8",
+        " channel-group 3 mode passive",
+        "exit",
+        "interface FastEthernet0/10",
+        " switchport mode access",
+        " switchport access vlan 100",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "SW2",
+      "template": "Switch0",
+      "x": 500,
+      "y": 400,
+      "vlans": [
+        {
+          "id": 100,
+          "name": "LAN"
+        },
+        {
+          "id": 200,
+          "name": "MGMT"
+        },
+        {
+          "id": 300,
+          "name": "EDGE"
+        }
+      ],
+      "config": [
+        "hostname SW2",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "ip default-gateway 192.168.200.254",
+        "vlan 100",
+        " name LAN",
+        "exit",
+        "vlan 200",
+        " name MGMT",
+        "exit",
+        "vlan 300",
+        " name EDGE",
+        "exit",
+        "interface vlan 200",
+        " ip address 192.168.200.52 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "interface range FastEthernet0/1-3",
+        " switchport mode trunk",
+        " switchport nonegotiate",
+        "exit",
+        "interface range FastEthernet0/1-2",
+        " channel-group 1 mode desirable",
+        "exit",
+        "interface range FastEthernet0/4-5",
+        " channel-group 2 mode passive",
+        "exit",
+        "interface FastEthernet0/10",
+        " switchport mode access",
+        " switchport access vlan 200",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "SW3",
+      "template": "Switch0",
+      "x": 350,
+      "y": 600,
+      "vlans": [
+        {
+          "id": 100,
+          "name": "LAN"
+        },
+        {
+          "id": 200,
+          "name": "MGMT"
+        },
+        {
+          "id": 300,
+          "name": "EDGE"
+        }
+      ],
+      "config": [
+        "hostname SW3",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "ip default-gateway 192.168.200.254",
+        "vlan 100",
+        " name LAN",
+        "exit",
+        "vlan 200",
+        " name MGMT",
+        "exit",
+        "vlan 300",
+        " name EDGE",
+        "exit",
+        "interface vlan 200",
+        " ip address 192.168.200.53 255.255.255.0",
+        " no shutdown",
+        "exit",
+        "interface range FastEthernet0/4-9",
+        " switchport mode dynamic desirable",
+        "exit",
+        "interface range FastEthernet0/4-5",
+        " channel-group 2 mode active",
+        "exit",
+        "interface range FastEthernet0/7-8",
+        " channel-group 3 mode active",
+        "exit",
+        "interface FastEthernet0/21",
+        " switchport mode trunk",
+        " switchport trunk allowed vlan 100,200",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "BR-SW",
+      "template": "Switch5",
+      "x": 950,
+      "y": 400,
+      "vlans": [
+        {
+          "id": 10,
+          "name": "BR-LAN"
+        },
+        {
+          "id": 100,
+          "name": "LAN"
+        },
+        {
+          "id": 200,
+          "name": "MGMT"
+        },
+        {
+          "id": 300,
+          "name": "EDGE"
+        }
+      ],
+      "config": [
+        "hostname BR-SW",
+        "ip domain-name kkep.local",
+        "username admin privilege 15 secret cisco",
+        "enable password class",
+        "service password-encryption",
+        "ip default-gateway 172.16.10.65",
+        "vlan 10",
+        " name BR-LAN",
+        "exit",
+        "vlan 100",
+        " name LAN",
+        "exit",
+        "vlan 200",
+        " name MGMT",
+        "exit",
+        "vlan 300",
+        " name EDGE",
+        "exit",
+        "interface vlan 10",
+        " ip address 172.16.10.66 255.255.255.224",
+        " no shutdown",
+        "exit",
+        "interface GigabitEthernet0/1",
+        " switchport mode trunk",
+        "exit",
+        "interface FastEthernet0/10",
+        " switchport mode access",
+        " switchport access vlan 10",
+        "exit",
+        "end"
+      ]
+    },
+    {
+      "name": "PC1",
+      "template": "PC0",
+      "x": 150,
+      "y": 700,
+      "ip": "192.168.100.10",
+      "mask": "255.255.255.0",
+      "gateway": "192.168.100.254"
+    },
+    {
+      "name": "SRV01",
+      "template": "Central Office Server0",
+      "x": 550,
+      "y": 700,
+      "ip": "192.168.200.10",
+      "mask": "255.255.255.0",
+      "gateway": "192.168.200.254"
+    },
+    {
+      "name": "BR-CLI",
+      "template": "Laptop0",
+      "x": 950,
+      "y": 700,
+      "ip": "172.16.10.70",
+      "mask": "255.255.255.224",
+      "gateway": "172.16.10.65"
+    }
+  ],
+  "links": [
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/1",
+      "to": "SW2",
+      "to_port": "FastEthernet0/1",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/2",
+      "to": "SW2",
+      "to_port": "FastEthernet0/2",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/3",
+      "to": "SW2",
+      "to_port": "FastEthernet0/3",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/4",
+      "to": "SW3",
+      "to_port": "FastEthernet0/4",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/5",
+      "to": "SW3",
+      "to_port": "FastEthernet0/5",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/6",
+      "to": "SW3",
+      "to_port": "FastEthernet0/6",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/7",
+      "to": "SW1",
+      "to_port": "FastEthernet0/7",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/8",
+      "to": "SW1",
+      "to_port": "FastEthernet0/8",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/9",
+      "to": "SW1",
+      "to_port": "FastEthernet0/9",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "SW1",
+      "from_port": "FastEthernet0/10",
+      "to": "PC1",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW2",
+      "from_port": "FastEthernet0/10",
+      "to": "SRV01",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "SW3",
+      "from_port": "FastEthernet0/21",
+      "to": "HQ",
+      "to_port": "GigabitEthernet0/0/0",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "HQ",
+      "from_port": "GigabitEthernet0/0/1",
+      "to": "ISP",
+      "to_port": "GigabitEthernet0/0/1",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "ISP",
+      "from_port": "GigabitEthernet0/0/0",
+      "to": "BR",
+      "to_port": "GigabitEthernet0/0/0",
+      "cable": "eCrossOver"
+    },
+    {
+      "from": "BR",
+      "from_port": "GigabitEthernet0/0/1",
+      "to": "BR-SW",
+      "to_port": "GigabitEthernet0/1",
+      "cable": "eStraightThrough"
+    },
+    {
+      "from": "BR-SW",
+      "from_port": "FastEthernet0/10",
+      "to": "BR-CLI",
+      "to_port": "FastEthernet0",
+      "cable": "eStraightThrough"
+    }
+  ]
+}

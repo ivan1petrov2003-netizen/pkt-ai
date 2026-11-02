@@ -1,0 +1,68 @@
+{
+  "devices": [
+    {
+      "name": "R1",
+      "template": "Router0",
+      "x": 300,
+      "y": 220,
+      "config": [
+        "hostname R1",
+        "interface GigabitEthernet0/0",
+        " no ip address",
+        " no shutdown",
+        "interface GigabitEthernet0/0.10",
+        " encapsulation dot1Q 10",
+        " ip address 10.0.0.1 255.255.255.0",
+        "interface GigabitEthernet0/0.20",
+        " encapsulation dot1Q 20",
+        " ip address 10.0.1.1 255.255.255.0",
+        "end"
+      ]
+    },
+    {
+      "name": "SW1",
+      "template": "Switch1",
+      "x": 600,
+      "y": 220,
+      "vlans": [
+        {"id": 10, "name": "DESIGN"},
+        {"id": 20, "name": "ACC"}
+      ],
+      "config": [
+        "hostname SW1",
+        "interface GigabitEthernet0/1",
+        " switchport mode trunk",
+        "interface FastEthernet0/1",
+        " switchport access vlan 10",
+        " switchport mode access",
+        "interface FastEthernet0/2",
+        " switchport access vlan 20",
+        " switchport mode access",
+        "end"
+      ]
+    },
+    {
+      "name": "PC-A",
+      "template": "PC0",
+      "x": 870,
+      "y": 140,
+      "ip": "10.0.0.10",
+      "mask": "255.255.255.0",
+      "gateway": "10.0.0.1"
+    },
+    {
+      "name": "PC-B",
+      "template": "PC0",
+      "x": 870,
+      "y": 320,
+      "ip": "10.0.1.10",
+      "mask": "255.255.255.0",
+      "gateway": "10.0.1.1"
+    }
+  ],
+  "links": [
+    {"from": "R1", "from_port": "GigabitEthernet0/0", "to": "SW1", "to_port": "GigabitEthernet0/1"},
+    {"from": "PC-A", "from_port": "FastEthernet0", "to": "SW1", "to_port": "FastEthernet0/1"},
+    {"from": "PC-B", "from_port": "FastEthernet0", "to": "SW1", "to_port": "FastEthernet0/2"}
+  ]
+}
