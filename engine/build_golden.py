@@ -26,6 +26,12 @@ DEFAULT_DONOR = Path(__file__).parent / "a.xml"
 
 def build_one(spec_path: Path, out_dir: Path, donor: Path = DEFAULT_DONOR) -> tuple[bool, str]:
     spec = __import__("json").loads(spec_path.read_text(encoding="utf-8"))
+    # per-spec донор (meta.donor, путь относительно engine/)
+    md = (spec.get("meta") or {}).get("donor")
+    if md:
+        cand = Path(__file__).parent / md
+        if cand.exists():
+            donor = cand
     # 1) валидация (тихая, через core-функцию)
     registry = _v.load_registry(None)
     donor_index, donor_ports = _v.donor_device_index([donor])
@@ -46,12 +52,16 @@ def build_one(spec_path: Path, out_dir: Path, donor: Path = DEFAULT_DONOR) -> tu
     out = out_dir / (spec_path.stem + ".pkt")
     out.write_bytes(pt_tool.encrypt_pkt(xml))
 
-    # 3) контроль: расшифровка обратно + версия
+    # 3) контроль: расшифровка обратно + симуляция связности (пинги!)
     xml2 = pt_tool.decrypt_pkt_auto(out.read_bytes())
     if xml2 != xml:
         return False, f"roundtrip XML разошёлся для {out.name}"
-    ver = "8.x"
-    return True, f"{out} ({out.stat().st_size} Б, XML {len(xml)}, ошибок валидации 0)"
+    import check_connectivity as _cc
+    problems, nhosts = _cc.analyze(out)
+    if problems:
+        return False, f"связность: {len(problems)} проблем: " + "; ".join(sorted(set(problems))[:3])
+    return True, (f"{out} ({out.stat().st_size} Б, XML {len(xml)}, "
+                  f"валидация 0, связность OK, хостов {nhosts})")
 
 
 def main() -> int:

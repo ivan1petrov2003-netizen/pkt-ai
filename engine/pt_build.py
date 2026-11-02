@@ -271,13 +271,42 @@ class Builder:
                               spec.get("dns", ""))
 
         # running / startup config
+        # ВАЖНО (изм. 2026-11-02): если config не задан — конфиг ДОНОРА НАСЛЕДОВАЛСЯ,
+        # что ломало сгенерированные схемы (VLAN/трунки донора рвали связность).
+        # Теперь по умолчанию конфиг очищается; наследование больше не применяется.
         config = spec.get("config")
-        if config is not None:
-            self._set_config(dev, config)
+        self._set_config(dev, config or [])
 
-        # switch VLAN database
-        if spec.get("vlans"):
-            self._set_vlans(dev, spec["vlans"])
+        # switch VLAN database: всегда нормализуем (base + указанные),
+        # пишем и vlan.dat (FILE_CONTENT), и ENGINE/VLANS (его читает PT 8.0).
+        # Если vlans не заданы — извлекаем базу из CLI-конфига ("vlan N / name X").
+        vlans = list(spec.get("vlans") or [])
+        if not vlans and config:
+            cur = None
+            for ln in config:
+                s = ln.strip()
+                m = re.match(r"^vlan\s+(\d+)$", s)
+                if m:
+                    cur = int(m.group(1))
+                    continue
+                m = re.match(r"^name\s+(\S.*)$", s)
+                if m and cur:
+                    vlans.append({"id": cur, "name": m.group(1).strip()})
+                    cur = None
+        # плюс все VLAN, УПОМЯНУТЫЕ в конфиге (access/trunk allowed/interface VlanN):
+        # конфиг может ссылаться на VLAN, создание которого живёт в VLAN-базе донора
+        seen = {v["id"] for v in vlans}
+        for ln in config or []:
+            for m in re.finditer(r"(?:access vlan|trunk allowed vlan(?:\s+add)?|voice vlan)\s+(\d+)", ln, re.I):
+                vid = int(m.group(1))
+                if vid not in seen:
+                    vlans.append({"id": vid})
+                    seen.add(vid)
+            m = re.match(r"^interface\s+[Vv]lan\s*(\d+)", ln.strip())
+            if m and int(m.group(1)) not in seen:
+                vlans.append({"id": int(m.group(1))})
+                seen.add(int(m.group(1)))
+        self._set_vlans(dev, vlans)
 
         # wireless SSID
         if spec.get("ssid"):
@@ -334,7 +363,11 @@ class Builder:
 
     @staticmethod
     def _set_vlans(dev, vlans):
-        """Rewrite the switch VLAN database (vlan.dat)."""
+        """Нормализует VLAN-базу свитча: vlan.dat (FILE_CONTENT) + ENGINE/VLANS.
+
+        Вызывается всегда: без spec-вланов база сбрасывается к 5 дефолтным,
+        чтобы не тащить VLAN-таблицу донора в собранную схему.
+        """
         base = [
             (1, "default"),
             (1002, "fddi-default"),
@@ -345,6 +378,9 @@ class Builder:
         table = {}
         for entry in vlans:
             table[int(entry["id"])] = entry.get("name", f"VLAN{int(entry['id']):04d}")
+        full = base + sorted(table.items())
+
+        # 1) vlan.dat
         for fc in dev.iter("FILE_CONTENT"):
             if fc.get("class") != "CVlanDatFileContent":
                 continue
@@ -353,14 +389,30 @@ class Builder:
                 continue
             for v in list(vlans_el):
                 vlans_el.remove(v)
-            for vid, vname in base + sorted(table.items()):
+            for vid, vname in full:
                 el = etree.SubElement(vlans_el, "VLAN")
                 el.set("rspan", "0")
                 el.set("number", str(vid))
                 el.set("name", vname)
             count = fc.find("VLAN_COUNT")
             if count is not None:
-                count.text = str(len(base) + len(table))
+                count.text = str(len(full))
+
+        # 2) ENGINE/VLANS — PT 8.0 восстанавливает VLAN-базу отсюда
+        #    (подтверждено patch_vlans в build_pr3 пользователя)
+        eng = dev.find("ENGINE")
+        if eng is None:
+            return
+        el = eng.find("VLANS")
+        if el is None:
+            el = etree.SubElement(eng, "VLANS")
+        for v in list(el):
+            el.remove(v)
+        for vid, vname in full:
+            e = etree.SubElement(el, "VLAN")
+            e.set("number", str(vid))
+            e.set("name", vname)
+            e.set("rspan", "0")
 
     # -- links -------------------------------------------------------------
     def add_link(self, spec: dict):

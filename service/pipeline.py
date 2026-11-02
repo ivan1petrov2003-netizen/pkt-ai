@@ -97,6 +97,22 @@ def build_pkt(ir: dict, donor_xml: bytes) -> bytes:
     return pt_tool.encrypt_pkt(xml)
 
 
+def _connectivity_check(pkt_bytes: bytes) -> list[str]:
+    """Симуляция пингов собранного файла без PT (check_connectivity)."""
+    import tempfile
+
+    import check_connectivity as _cc
+
+    with tempfile.NamedTemporaryFile(suffix=".pkt", delete=False) as tf:
+        tf.write(pkt_bytes)
+        tmp = tf.name
+    try:
+        problems, _ = _cc.analyze(Path(tmp))
+        return sorted(set(problems))
+    finally:
+        Path(tmp).unlink(missing_ok=True)
+
+
 def run(task: str, images: list[str] | None = None, provider: str | None = None,
         model: str | None = None, donor_path: Path | None = None,
         inline_ir: dict | None = None) -> dict:
@@ -121,9 +137,15 @@ def run(task: str, images: list[str] | None = None, provider: str | None = None,
             return {"ok": False, "pkt_b64": None, "ir": inline_ir, "problems": problems,
                     "iterations": 0, "log": log, "error": "inline IR не прошёл валидацию"}
         pkt = build_pkt(inline_ir, donor_xml)
+        conn = _connectivity_check(pkt)
+        log.append("связность (симуляция пингов): " + ("OK" if not conn else "; ".join(conn[:3])))
+        if conn:
+            return {"ok": False, "pkt_b64": None, "ir": inline_ir, "problems": problems,
+                    "iterations": 0, "log": log, "connectivity": conn,
+                    "error": "собранная схема не проходит проверку связности"}
         log.append(f"собрано .pkt за {time.time() - t0:.1f}с")
         return {"ok": True, "pkt_b64": base64.b64encode(pkt).decode(), "ir": inline_ir,
-                "problems": problems, "iterations": 0, "log": log}
+                "problems": problems, "connectivity": [], "iterations": 0, "log": log}
 
     # --- LLM + repair-loop ---
     prov_name, chat = _llm.pick_provider(provider)
@@ -152,9 +174,23 @@ def run(task: str, images: list[str] | None = None, provider: str | None = None,
                    f"линков {len(ir.get('links', []))}, ошибок {len(errors)}")
         if not errors:
             pkt = build_pkt(ir, donor_xml)
-            log.append(f"готово: .pkt собран за {time.time() - t0:.1f}с")
+            conn = _connectivity_check(pkt)
+            if conn:
+                log.append(f"[итерация {it}] связность: " + "; ".join(conn[:3]))
+                if it == MAX_ITER:
+                    return {"ok": False, "pkt_b64": None, "ir": ir, "problems": problems,
+                            "connectivity": conn, "iterations": it, "log": log,
+                            "error": "схема собирается, но не проходит проверку связности"}
+                # связность чинит тот же repair-loop: ошибки валидации = проблемы связности
+                messages_extra.append({"role": "assistant",
+                                       "content": json.dumps(ir, ensure_ascii=False)[:8000]})
+                messages_extra.append({"role": "user",
+                                       "content": _repair_prompt([
+                                           {"device": "сеть", "message": m} for m in conn])})
+                continue
+            log.append(f"готово: .pkt собран за {time.time() - t0:.1f}с (связность OK)")
             return {"ok": True, "pkt_b64": base64.b64encode(pkt).decode(), "ir": ir,
-                    "problems": problems, "iterations": it, "log": log}
+                    "problems": problems, "connectivity": [], "iterations": it, "log": log}
 
         if it == MAX_ITER:
             break
