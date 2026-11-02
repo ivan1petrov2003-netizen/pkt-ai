@@ -380,10 +380,34 @@ class Builder:
         dhcp = target.find("PORT_DHCP_ENABLE")
         if dhcp is not None:
             dhcp.text = "false"
+        # DHCP_SERVER_IP донора (последний сервер) — чистим
+        srv = target.find("DHCP_SERVER_IP")
+        if srv is not None:
+            srv.text = "0.0.0.0"
         if dns:
             d = target.find("PORT_DNS")
             if d is not None:
                 d.text = dns
+        else:
+            d = target.find("PORT_DNS")
+            if d is not None:
+                d.text = ""
+        # DNS_CLIENT на уровне ENGINE — донорский мусор
+        dc = dev.find("ENGINE/DNS_CLIENT/SERVER_IP")
+        if dc is not None:
+            dc.text = dns or ""
+        # ГЛАВНОЕ: DHCP-карта донора (ENGINE/DHCP_CLIENT/PORT_DATA_MAP).
+        # Если проводной порт числится там DHCP-клиентом, PT при загрузке принудительно
+        # включает DHCP для него и ИГНОРИРУЕТ PORT/IP + PORT_DHCP_ENABLE=false
+        # (подтверждено GUI-экспериментом в PT 8.0, 2026-11-02).
+        # Удаляем все записи про Ethernet-порты (Bluetooth и прочие не трогаем).
+        dhcp_map = dev.find("ENGINE/DHCP_CLIENT/PORT_DATA_MAP")
+        if dhcp_map is not None:
+            for entry in list(dhcp_map.findall("PORT_DATA_ENTRY")):
+                pe = entry.find("PORT")
+                pname = (pe.text or "").strip() if pe is not None else ""
+                if "Ethernet" in pname:
+                    dhcp_map.remove(entry)
         gw = dev.find("ENGINE/GATEWAY")
         if gw is not None and gateway:
             gw.text = gateway

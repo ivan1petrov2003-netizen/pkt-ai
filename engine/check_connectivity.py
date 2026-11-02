@@ -148,7 +148,16 @@ def analyze(pkt_path: Path) -> tuple[list[str], int]:
                 hmask = port.findtext("SUBNET") or "255.255.255.0"
                 hgw = port.findtext("PORT_GATEWAY") or ""
                 break
-        # vlan.dat + ENGINE/VLANS (PT 8.0 восстанавливает базу из обоих мест)
+        # DHCP-карта донора: проводной порт в DHCP_CLIENT → PT принудительно
+        # включает DHCP и игнорирует статический IP (проверено в PT 8.0)
+        if hip:
+            dm = dev.find("ENGINE/DHCP_CLIENT/PORT_DATA_MAP")
+            if dm is not None:
+                for entry in dm.findall("PORT_DATA_ENTRY"):
+                    pname = (entry.findtext("PORT") or "").strip()
+                    if "Ethernet" in pname:
+                        problems.append(f"[{name}] проводной порт {pname} числится в "
+                                        f"DHCP-карте донора → статический IP применён не будет")
         vlans_db: set[int] = {1, 1002, 1003, 1004, 1005}
         for fc in dev.iter("FILE_CONTENT"):
             if fc.get("class") == "CVlanDatFileContent":
