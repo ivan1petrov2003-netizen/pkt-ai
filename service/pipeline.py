@@ -156,7 +156,14 @@ def run(task: str, images: list[str] | None = None, provider: str | None = None,
 
     for it in range(1, MAX_ITER + 1):
         full_user = user_msg if it == 1 else user_msg
-        text = _chat_with_history(chat, system, full_user, images, model, messages_extra)
+        try:
+            text = _chat_with_history(chat, system, full_user, images, model, messages_extra)
+        except _llm.LLMError as e:
+            log.append(f"[итерация {it}] сбой LLM: {e}; повтор той же итерации")
+            if it == MAX_ITER:
+                return {"ok": False, "pkt_b64": None, "ir": None, "problems": [],
+                        "iterations": it, "log": log, "error": f"LLM недоступен: {e}"}
+            continue
         try:
             ir = _llm.extract_json(text)
         except _llm.LLMError as e:

@@ -31,10 +31,15 @@ def _data_url_parts(data_url: str) -> tuple[str, bytes]:
     return m.group(1), base64.b64decode(m.group(2))
 
 
-def _http_post(url: str, headers: dict, payload: dict, timeout: float = 180.0) -> dict:
+def _http_post(url: str, headers: dict, payload: dict, timeout: float = 420.0) -> dict:
     import httpx
 
-    r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
+    try:
+        r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
+    except httpx.TimeoutException as e:
+        raise LLMError(f"LLM не ответил за {timeout:.0f}с (модель занята/медленная): {e}") from e
+    except httpx.HTTPError as e:
+        raise LLMError(f"сетевая ошибка LLM: {e}") from e
     if r.status_code >= 400:
         raise LLMError(f"LLM HTTP {r.status_code}: {r.text[:500]}")
     return r.json()
