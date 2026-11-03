@@ -1,5 +1,7 @@
 # pkt-ai
 
+**GitHub:** https://github.com/ivan1petrov2003-netizen/pkt-ai · тег v0.2.0
+
 Генератор схем Cisco Packet Tracer: текст задания / фото → LLM → IR (JSON) → детерминированный
 builder → валидный `.pkt` (PT 6–8.x).
 
