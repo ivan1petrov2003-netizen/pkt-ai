@@ -159,6 +159,14 @@ def run(task: str, images: list[str] | None = None, provider: str | None = None,
         try:
             text = _chat_with_history(chat, system, full_user, images, model, messages_extra)
         except _llm.LLMError as e:
+            msg = str(e)
+            if images and ("изображени" in msg.lower() or "vision" in msg.lower()):
+                # модель без зрения — деградируем: повторяем без картинок
+                log.append("[итерация " + str(it) + "] модель не умеет читать изображения — "
+                           "повторяю без картинок (текст задания и вложенные методички учтены)")
+                images = None
+                it -= 1  # повтор той же итерации, не считаем потерей
+                continue
             log.append(f"[итерация {it}] сбой LLM: {e}; повтор той же итерации")
             if it == MAX_ITER:
                 return {"ok": False, "pkt_b64": None, "ir": None, "problems": [],

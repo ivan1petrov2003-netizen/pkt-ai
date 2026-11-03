@@ -14,3 +14,4 @@ corpus/samples/QoS.pkt
 corpus/samples/voip_local.pkt
 corpus/samples/mqttdemo.pka
 corpus/samples/sokoban.pka
+service/.env

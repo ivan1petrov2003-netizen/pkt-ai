@@ -24,6 +24,7 @@ import time
 from pathlib import Path
 
 from fastapi import FastAPI, Header, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 SERVICE = Path(__file__).parent
@@ -33,6 +34,15 @@ import pipeline  # noqa: E402
 import llm as _llm  # noqa: E402
 
 ENGINE = SERVICE.parent / "engine"
+
+# локальный конфиг service/.env (KEY=VALUE) — не переопределяет уже заданные переменные
+_envf = SERVICE / ".env"
+if _envf.exists():
+    for _ln in _envf.read_text(encoding="utf-8").splitlines():
+        _ln = _ln.strip()
+        if _ln and not _ln.startswith("#") and "=" in _ln:
+            _k, _, _v = _ln.partition("=")
+            os.environ.setdefault(_k.strip(), _v.strip())
 
 app = FastAPI(
     title="pkt-ai API",
@@ -77,6 +87,12 @@ def _slug(text: str) -> str:
 @app.get("/health")
 def health():
     return {"ok": True, "version": "0.1.0"}
+
+
+@app.get("/", response_class=HTMLResponse)
+def web():
+    """Веб-чат: текст задания + файлы → .pkt."""
+    return (SERVICE / "web.html").read_text(encoding="utf-8")
 
 
 @app.get("/api/v1/inventory")
