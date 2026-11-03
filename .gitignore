@@ -5,3 +5,12 @@ dist/
 engine/_tmp/
 out/
 engine/_tmp/
+
+# учебные файлы из установки Cisco PT — не публикуем
+corpus/samples/AAA_Simple_Authentication.pkt
+corpus/samples/CBAC_3Routers.pkt
+corpus/samples/Outside_Nat.pkt
+corpus/samples/QoS.pkt
+corpus/samples/voip_local.pkt
+corpus/samples/mqttdemo.pka
+corpus/samples/sokoban.pka
